@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Timetable</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?after">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="perl0 min-h-screen  items-center justify-center">
+    <div class="relative flex flex-col items-center ">
+        <div class="perl22 m-16 px-8 py-8 justify-items-center">
+            <div class=" grid grid-flow-col  justify-items-center grid-cols-6  pt-8 text-center  place-items-stretch">
+                <div class="justify-items-center">
+                    <div class="border-t border-r border-gray-400 w-44 h-8"></div>
+                    <div class="border-t border-r  border-gray-400 w-44 perl2 h-16 pt-4 pt-4">1 class
+                    </div>
+                    <div class="border-t border-r border-gray-400 w-44  perl2 h-16 pt-4 ">2 class</div>
+                    <div class="border-t border-r border-gray-400 w-44  perl2 h-16 pt-4 ">3 class</div>
+                    <div class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4 ">4 class</div>
+                    <div class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4 ">5 class</div>
+                    <div class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4 ">6 class</div>
+                    <div class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4 ">7 class</div>
+                    <div class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4 ">8 class</div>
+                    <div class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4 ">9 class</div>
+                    <div class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4 ">10 class</div>
+                    <div class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4 ">11 class</div>
+                    <div class="border-t border-r border-b border-gray-400 w-44  perl2 h-16 pt-4 ">12 class</div>
+
+                </div>
+                <div class="justify-items-center">
+                    <div class="border-t border-r border-gray-400 w-44 h-8 ">Mon</div>
+                    {% for time,class, text in zipped %}
+                        {% if "Mon" in time %}
+                            <div class="{{ class }}">{{ text }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="justify-items-center">
+                    <div class="border-t border-r border-gray-400 w-44 h-8 ">Tue</div>
+                    {% for time,class, text in zipped2 %}
+                        {% if "Tue" in time %}
+                            <div class="{{ class }}">{{ text }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="justify-items-center">
+                    <div class="border-t border-r border-gray-400 w-44 h-8 ">Wed</div>
+                    {% for time,class, text in zipped3 %}
+                        {% if "Wed" in time %}
+                            <div class="{{ class }}">{{ text }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="justify-items-center">
+                    <div class="border-t border-r border-gray-400 w-44 h-8">Thu</div>
+                    {% for time,class, text in zipped4 %}
+                        {% if "Thu" in time %}
+                            <div class="{{ class }}">{{ text }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="justify-items-center">
+                    <div class="border-t border-r border-gray-400 w-44 h-8">Fri</div>
+                    {% for time,class, text in zipped5 %}
+                        {% if "Fri" in time %}
+                            <div class="{{ class }}">{{ text }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% for text, class in icampus %}
+                <div class="{{ class }}">
+                    {{ text }}
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="relative flex  flex-col items-center justify-center overflow-hidden  p-8 ">
+            <a onClick="window.location.reload()" style="cursor: pointer;">
+                <div class=" p-3 perl2 font-semibold hover:bg-green-400">Recommend another timetable</div>
+            </a>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
