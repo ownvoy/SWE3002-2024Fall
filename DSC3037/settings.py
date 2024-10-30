@@ -95,11 +95,8 @@ DATABASES = {
         "NAME": "swe3002",
         "USER": "root",
         "PASSWORD": "1234",
-        "HOST": "localhost",
+        "HOST": "127.0.0.1",
         "PORT": "",
-        "OPTIONS": {
-            "unix_socket": "/var/lib/mysql/mysql.sock",
-        },
     }
 }
 
