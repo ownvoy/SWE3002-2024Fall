@@ -62,29 +62,7 @@ class SQL:
     def subject_available(self, student_id):
         with connection.cursor() as cursor:
             cursor.execute(
-                f"""SELECT *
-                        FROM skku_subject
-                        WHERE course_title NOT IN (SELECT course_title
-                                                FROM student_history
-                                                            JOIN skku_subject ON student_history.course_id = skku_subject.course_id
-                                                            JOIN student_academic ON student_history.student_id = student_academic.student_id
-                                                WHERE student_history.student_id = cast({student_id} as unsigned )
-                                                    OR skku_subject.type_of_field = '교양'
-                                                    AND (
-                                                                skku_subject.major = student_academic.major
-                                                                OR skku_subject.major = student_academic.double_major
-                                                                OR skku_subject.major = student_academic.triple_major
-                                                        ))
-                        GROUP BY course_title, skku_subject.major, skku_subject.semester, skku_subject.course_code
-                        HAVING skku_subject.semester = "2022학년도 2학기"
-                            AND (
-                                    skku_subject.major = (SELECT major
-                                                            FROM student_academic
-                                                            WHERE student_id = cast({student_id} as unsigned ))
-                                OR skku_subject.major = (SELECT double_major
-                                                            FROM student_academic
-                                                            WHERE student_id = cast({student_id} as unsigned ))
-                                OR skku_subject.type_of_field = '교양')"""
+                f"""SELECT * FROM skku_subject WHERE course_title NOT IN ( SELECT course_title FROM student_history JOIN skku_subject ON student_history.course_id = skku_subject.course_id JOIN student_academic ON student_history.student_id = student_academic.student_id WHERE student_history.student_id = CAST({student_id} AS UNSIGNED) OR (skku_subject.type_of_field = '교양' AND ( skku_subject.major = student_academic.major OR skku_subject.major = student_academic.double_major OR skku_subject.major = student_academic.triple_major )) ) AND skku_subject.semester = "2022학년도 2학기" AND ( skku_subject.major = (SELECT major FROM student_academic WHERE student_id = CAST({student_id} AS UNSIGNED)) OR skku_subject.major = (SELECT double_major FROM student_academic WHERE student_id = CAST({student_id} AS UNSIGNED)) OR skku_subject.type_of_field = '교양' );"""
             )
             columns = [col[0] for col in cursor.description]
             return [dict(zip(columns, row)) for row in cursor.fetchall()]
@@ -102,3 +80,19 @@ class SQL:
             )
             columns = [col[0] for col in cursor.description]
             return [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+    def user_register(self, login_id, login_password, student_name, student_id, major, double_major, triple_major, student_grade):
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                INSERT INTO student_academic (student_name, student_id, major, double_major, triple_major, student_grade)
+                VALUES (%s, %s, %s, %s, %s, %s)
+                """, [student_name, student_id, major, double_major, triple_major, student_grade]
+            )
+            cursor.execute(
+                """
+                INSERT INTO user_info (student_id, login_id, login_password)
+                VALUES (%s, %s, %s)
+                """, [student_id, login_id, login_password]
+            )
+            return True

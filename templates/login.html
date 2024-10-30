@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>login</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    {% if messages %} {% for message in messages %}
+
+    <script>
+      alert("{{ message }}");
+    </script>
+    {% endfor %} {% endif %}
+
+    <div
+      class="gradiant relative flex flex-col min-h-screen items-center justify-center p-8"
+    >
+      <div class="w-1/4 h-5/6 text-center bg-green-100 pt-4">
+        <div class="flex flex-col items-center text-3xl font-bold pt-2">
+          <div class="text-left">Sign In</div>
+        </div>
+        <form method="post">
+          {% csrf_token %}
+          <div class="flex flex-col items-center py-5">
+            <div>ID</div>
+
+            <input name="login_id" type="text" id="id" class="px-2" />
+            <div class="pt-2">Password</div>
+            <input
+              name="login_password"
+              type="password"
+              id="password"
+              class="px-2"
+            />
+          </div>
+
+          <div
+            id="sign"
+            class="flex flex-row items-center text-lg font-bold pt-6 pb-6"
+          >
+            <button
+              type="submit"
+              name="action"
+              value="signin"
+              class="text-center py-1 w-2/5 mr-2 bg-green-200 hover:bg-green-400"
+            >
+              Sign In
+            </button>
+            <button
+              type="submit"
+              name="action"
+              value="signup"
+              class="text-center py-1 w-2/5 bg-blue-200 hover:bg-blue-400"
+            >
+              Sign Up
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="{% static 'js/getdata.js' %}"></script>
+  </body>
+</html>

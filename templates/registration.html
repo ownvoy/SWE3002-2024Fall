@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입 페이지</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="signup-container">
+      <h2>회원가입</h2>
+      <form method="post">
+        <div class="form-group">
+          <label for="student_name">이름:</label>
+          <input type="text" id="student_name" name="student_name" required />
+        </div>
+        <div class="form-group">
+          <label for="student_id">학번:</label>
+          <input type="number" id="student_id" name="student_id" required />
+        </div>
+        <div class="form-group">
+          <label for="major">전공:</label>
+          <input
+            list="majors"
+            id="major"
+            name="major"
+            placeholder="전공을 입력하세요"
+            required
+          />
+          <datalist id="majors">
+            <option value="생명산업공학전공"></option>
+            <option value="소비자학과"></option>
+            <option value="소재부품융합공학과"></option>
+            <option value="소프트웨어학과"></option>
+            <option value="수학과"></option>
+            <option value="수학교육과"></option>
+            <option value="스포츠과학과"></option>
+            <option value="시스템경영공학과"></option>
+            <option value="식품생명공학과"></option>
+            <option value="신소재공학부"></option>
+            <option value="심리학과"></option>
+            <option value="아동·청소년학과"></option>
+            <option value="앙트레프레너십연계전공"></option>
+            <option value="약학과"></option>
+            <option value="약학부"></option>
+            <option value="여성학전공"></option>
+            <option value="연기예술학과"></option>
+            <option value="영상학과"></option>
+            <option value="영어영문학과"></option>
+            <option value="유라시아지역문화경제전공"></option>
+            <option value="유전공학과"></option>
+            <option value="유학·동양학부"></option>
+            <option value="융합생명공학과"></option>
+            <option value="융합소프트웨어연계전공"></option>
+            <option value="융합소프트웨어연계전공-SCSC"></option>
+            <option value="융합소프트웨어연계전공-SW융합"></option>
+            <option value="융합소프트웨어전공"></option>
+            <option value="융합언어학연계전공"></option>
+            <option value="의상학과"></option>
+            <option value="의예과"></option>
+            <option value="의학과"></option>
+            <option value="인공지능융합전공"></option>
+            <option value="인포매틱스융합전공"></option>
+            <option value="일본학전공"></option>
+            <option value="자연과학계열"></option>
+            <option value="전자전기컴퓨터공학계열"></option>
+            <option value="전자전기공학부"></option>
+            <option value="전자전기컴퓨터공학전공"></option>
+            <option value="정보통신계열"></option>
+            <option value="정치외교학과"></option>
+            <option value="조경학과"></option>
+            <option value="중국학전공"></option>
+            <option value="중어중문학과"></option>
+            <option value="건설환경공학부"></option>
+            <option value="건축공학과"></option>
+            <option value="건축토목공학부"></option>
+            <option value="건축학과"></option>
+            <option value="경영학(글로벌)전공"></option>
+            <option value="경영학과"></option>
+            <option value="경제학과"></option>
+            <option value="고분자시스템공학과"></option>
+            <option value="고전학연계전공"></option>
+            <option value="공의과법연계전공"></option>
+            <option value="공학계열"></option>
+            <option value="교육학과"></option>
+            <option value="국어국문학과"></option>
+            <option value="국제통상학전공"></option>
+            <option value="글로벌경영학과"></option>
+            <option value="글로벌경제학과"></option>
+            <option value="글로벌리더학부"></option>
+            <option value="글로벌융합학부"></option>
+            <option value="글로컬문화콘텐츠전공"></option>
+            <option value="기계공학부"></option>
+            <option value="나노공학과"></option>
+            <option value="나노과학공학전공"></option>
+            <option value="데이터사이언스융합전공"></option>
+            <option value="독어독문학과"></option>
+            <option value="디자인학과"></option>
+            <option value="러시아연구학과"></option>
+            <option value="마이크로시스템기술전공"></option>
+            <option value="무용학과"></option>
+            <option value="문헌정보학과"></option>
+            <option value="물리학과"></option>
+            <option value="미디어커뮤니케이션학과"></option>
+            <option value="미래인문학연계전공"></option>
+            <option value="미술학과"></option>
+            <option value="바이오메카트로닉스학과"></option>
+            <option value="반도체시스템공학과"></option>
+            <option value="법무정책학연계전공"></option>
+            <option value="법학과"></option>
+            <option value="비교문화전공"></option>
+            <option value="사학과"></option>
+            <option value="사회복지학과"></option>
+            <option value="사회학과"></option>
+            <option value="사회환경시스템공학과"></option>
+            <option value="차세대바이오헬스융합트랙"></option>
+            <option value="철학과"></option>
+            <option value="컬쳐앤테크놀로지융합전공"></option>
+            <option value="컴퓨터공학과"></option>
+            <option value="컴퓨터교육과"></option>
+            <option value="텍스타일시스템공학과"></option>
+            <option value="텍스타일시스템공학전공"></option>
+            <option value="통계학과"></option>
+            <option value="프랑스어문학과"></option>
+            <option value="한국학연계전공"></option>
+            <option value="한국학전공"></option>
+            <option value="한문교육과"></option>
+            <option value="한문학과"></option>
+            <option value="행정학과"></option>
+            <option value="화학공학·고분자공학부"></option>
+            <option value="화학과"></option>
+          </datalist>
+        </div>
+        <div class="form-group">
+          <label for="double_major">부전공:</label>
+          <input
+            list="double_majors"
+            id="double_major"
+            name="double_major"
+            placeholder="없으면 비워주세요"
+          />
+          <datalist id="double_majors">
+            <option value="생명산업공학전공"></option>
+            <option value="소비자학과"></option>
+            <option value="소재부품융합공학과"></option>
+            <option value="소프트웨어학과"></option>
+            <option value="수학과"></option>
+            <option value="수학교육과"></option>
+            <option value="스포츠과학과"></option>
+            <option value="시스템경영공학과"></option>
+            <option value="식품생명공학과"></option>
+            <option value="신소재공학부"></option>
+            <option value="심리학과"></option>
+            <option value="아동·청소년학과"></option>
+            <option value="앙트레프레너십연계전공"></option>
+            <option value="약학과"></option>
+            <option value="약학부"></option>
+            <option value="여성학전공"></option>
+            <option value="연기예술학과"></option>
+            <option value="영상학과"></option>
+            <option value="영어영문학과"></option>
+            <option value="유라시아지역문화경제전공"></option>
+            <option value="유전공학과"></option>
+            <option value="유학·동양학부"></option>
+            <option value="융합생명공학과"></option>
+            <option value="융합소프트웨어연계전공"></option>
+            <option value="융합소프트웨어연계전공-SCSC"></option>
+            <option value="융합소프트웨어연계전공-SW융합"></option>
+            <option value="융합소프트웨어전공"></option>
+            <option value="융합언어학연계전공"></option>
+            <option value="의상학과"></option>
+            <option value="의예과"></option>
+            <option value="의학과"></option>
+            <option value="인공지능융합전공"></option>
+            <option value="인포매틱스융합전공"></option>
+            <option value="일본학전공"></option>
+            <option value="자연과학계열"></option>
+            <option value="전자전기컴퓨터공학계열"></option>
+            <option value="전자전기공학부"></option>
+            <option value="전자전기컴퓨터공학전공"></option>
+            <option value="정보통신계열"></option>
+            <option value="정치외교학과"></option>
+            <option value="조경학과"></option>
+            <option value="중국학전공"></option>
+            <option value="중어중문학과"></option>
+            <option value="건설환경공학부"></option>
+            <option value="건축공학과"></option>
+            <option value="건축토목공학부"></option>
+            <option value="건축학과"></option>
+            <option value="경영학(글로벌)전공"></option>
+            <option value="경영학과"></option>
+            <option value="경제학과"></option>
+            <option value="고분자시스템공학과"></option>
+            <option value="고전학연계전공"></option>
+            <option value="공의과법연계전공"></option>
+            <option value="공학계열"></option>
+            <option value="교육학과"></option>
+            <option value="국어국문학과"></option>
+            <option value="국제통상학전공"></option>
+            <option value="글로벌경영학과"></option>
+            <option value="글로벌경제학과"></option>
+            <option value="글로벌리더학부"></option>
+            <option value="글로벌융합학부"></option>
+            <option value="글로컬문화콘텐츠전공"></option>
+            <option value="기계공학부"></option>
+            <option value="나노공학과"></option>
+            <option value="나노과학공학전공"></option>
+            <option value="데이터사이언스융합전공"></option>
+            <option value="독어독문학과"></option>
+            <option value="디자인학과"></option>
+            <option value="러시아연구학과"></option>
+            <option value="마이크로시스템기술전공"></option>
+            <option value="무용학과"></option>
+            <option value="문헌정보학과"></option>
+            <option value="물리학과"></option>
+            <option value="미디어커뮤니케이션학과"></option>
+            <option value="미래인문학연계전공"></option>
+            <option value="미술학과"></option>
+            <option value="바이오메카트로닉스학과"></option>
+            <option value="반도체시스템공학과"></option>
+            <option value="법무정책학연계전공"></option>
+            <option value="법학과"></option>
+            <option value="비교문화전공"></option>
+            <option value="사학과"></option>
+            <option value="사회복지학과"></option>
+            <option value="사회학과"></option>
+            <option value="사회환경시스템공학과"></option>
+            <option value="차세대바이오헬스융합트랙"></option>
+            <option value="철학과"></option>
+            <option value="컬쳐앤테크놀로지융합전공"></option>
+            <option value="컴퓨터공학과"></option>
+            <option value="컴퓨터교육과"></option>
+            <option value="텍스타일시스템공학과"></option>
+            <option value="텍스타일시스템공학전공"></option>
+            <option value="통계학과"></option>
+            <option value="프랑스어문학과"></option>
+            <option value="한국학연계전공"></option>
+            <option value="한국학전공"></option>
+            <option value="한문교육과"></option>
+            <option value="한문학과"></option>
+            <option value="행정학과"></option>
+            <option value="화학공학·고분자공학부"></option>
+            <option value="화학과"></option>
+          </datalist>
+        </div>
+        <div class="form-group">
+          <label for="triple_major">3전공:</label>
+          <input
+            list="triple_majors"
+            id="triple_major"
+            name="triple_major"
+            placeholder="없으면 비워주세요"
+          />
+          <datalist id="triple_majors">
+            <option value="생명산업공학전공"></option>
+            <option value="소비자학과"></option>
+            <option value="소재부품융합공학과"></option>
+            <option value="소프트웨어학과"></option>
+            <option value="수학과"></option>
+            <option value="수학교육과"></option>
+            <option value="스포츠과학과"></option>
+            <option value="시스템경영공학과"></option>
+            <option value="식품생명공학과"></option>
+            <option value="신소재공학부"></option>
+            <option value="심리학과"></option>
+            <option value="아동·청소년학과"></option>
+            <option value="앙트레프레너십연계전공"></option>
+            <option value="약학과"></option>
+            <option value="약학부"></option>
+            <option value="여성학전공"></option>
+            <option value="연기예술학과"></option>
+            <option value="영상학과"></option>
+            <option value="영어영문학과"></option>
+            <option value="유라시아지역문화경제전공"></option>
+            <option value="유전공학과"></option>
+            <option value="유학·동양학부"></option>
+            <option value="융합생명공학과"></option>
+            <option value="융합소프트웨어연계전공"></option>
+            <option value="융합소프트웨어연계전공-SCSC"></option>
+            <option value="융합소프트웨어연계전공-SW융합"></option>
+            <option value="융합소프트웨어전공"></option>
+            <option value="융합언어학연계전공"></option>
+            <option value="의상학과"></option>
+            <option value="의예과"></option>
+            <option value="의학과"></option>
+            <option value="인공지능융합전공"></option>
+            <option value="인포매틱스융합전공"></option>
+            <option value="일본학전공"></option>
+            <option value="자연과학계열"></option>
+            <option value="전자전기컴퓨터공학계열"></option>
+            <option value="전자전기공학부"></option>
+            <option value="전자전기컴퓨터공학전공"></option>
+            <option value="정보통신계열"></option>
+            <option value="정치외교학과"></option>
+            <option value="조경학과"></option>
+            <option value="중국학전공"></option>
+            <option value="중어중문학과"></option>
+            <option value="건설환경공학부"></option>
+            <option value="건축공학과"></option>
+            <option value="건축토목공학부"></option>
+            <option value="건축학과"></option>
+            <option value="경영학(글로벌)전공"></option>
+            <option value="경영학과"></option>
+            <option value="경제학과"></option>
+            <option value="고분자시스템공학과"></option>
+            <option value="고전학연계전공"></option>
+            <option value="공의과법연계전공"></option>
+            <option value="공학계열"></option>
+            <option value="교육학과"></option>
+            <option value="국어국문학과"></option>
+            <option value="국제통상학전공"></option>
+            <option value="글로벌경영학과"></option>
+            <option value="글로벌경제학과"></option>
+            <option value="글로벌리더학부"></option>
+            <option value="글로벌융합학부"></option>
+            <option value="글로컬문화콘텐츠전공"></option>
+            <option value="기계공학부"></option>
+            <option value="나노공학과"></option>
+            <option value="나노과학공학전공"></option>
+            <option value="데이터사이언스융합전공"></option>
+            <option value="독어독문학과"></option>
+            <option value="디자인학과"></option>
+            <option value="러시아연구학과"></option>
+            <option value="마이크로시스템기술전공"></option>
+            <option value="무용학과"></option>
+            <option value="문헌정보학과"></option>
+            <option value="물리학과"></option>
+            <option value="미디어커뮤니케이션학과"></option>
+            <option value="미래인문학연계전공"></option>
+            <option value="미술학과"></option>
+            <option value="바이오메카트로닉스학과"></option>
+            <option value="반도체시스템공학과"></option>
+            <option value="법무정책학연계전공"></option>
+            <option value="법학과"></option>
+            <option value="비교문화전공"></option>
+            <option value="사학과"></option>
+            <option value="사회복지학과"></option>
+            <option value="사회학과"></option>
+            <option value="사회환경시스템공학과"></option>
+            <option value="차세대바이오헬스융합트랙"></option>
+            <option value="철학과"></option>
+            <option value="컬쳐앤테크놀로지융합전공"></option>
+            <option value="컴퓨터공학과"></option>
+            <option value="컴퓨터교육과"></option>
+            <option value="텍스타일시스템공학과"></option>
+            <option value="텍스타일시스템공학전공"></option>
+            <option value="통계학과"></option>
+            <option value="프랑스어문학과"></option>
+            <option value="한국학연계전공"></option>
+            <option value="한국학전공"></option>
+            <option value="한문교육과"></option>
+            <option value="한문학과"></option>
+            <option value="행정학과"></option>
+            <option value="화학공학·고분자공학부"></option>
+            <option value="화학과"></option>
+          </datalist>
+        </div>
+        <div class="form-group">
+          <label for="student_grade">학년:</label>
+          <input
+            list="grades"
+            id="student_grade"
+            name="student_grade"
+            placeholder="학년을 입력하세요"
+            required
+          />
+          <datalist id="grades">
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
+            <option value="4"></option>
+          </datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="login_id">ID:</label>
+          <input type="text" id="login_id" name="login_id" required />
+        </div>
+        <div class="form-group">
+          <label for="login_password">비밀번호:</label>
+          <input
+            type="login_password"
+            id="login_password"
+            name="login_password"
+            required
+          />
+        </div>
+        <button type="submit">가입하기</button>
+      </form>
+    </div>
+  </body>
+</html>
