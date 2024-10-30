@@ -279,6 +279,7 @@ class Timetable(APIView):
         timetable = timetabling.timetable(possible)
         text_dict = {}
         icampus = []
+
         for course in timetable:
             if "i-Campus" in course["campus"]:
                 icampus.append(course)
@@ -296,6 +297,8 @@ class Timetable(APIView):
         icam_class_list = icam_class_dict.values()
 
         icam_zipped = zip(icam_text_list, icam_class_list)
+
+
 
         for t in all_time:
             text_dict[t] = " "
@@ -327,6 +330,7 @@ class Timetable(APIView):
                 elif idx == 5:
                     if len(new_english_title) > 2:
                         text_dict[time] = new_english_title[2]
+                
 
         text_list = text_dict.values()
 
@@ -367,7 +371,23 @@ class Timetable(APIView):
                     )
 
         class_list = class_dict.values()
-        zipped = zip(all_time, class_list, text_list)
+
+        print("aa")
+        print()
+        print(course["course_id"])
+        
+        id_dict={}
+        for t in all_time:
+            id_dict[t] = " "
+        
+        for course in timetable:
+            for idx, time in enumerate(course["classtime2"]):
+                    id_dict[time]=course["course_id"]
+
+
+        id_list = id_dict.values()
+
+        zipped = zip(all_time, class_list, text_list, id_list)
         zipped2 = copy.deepcopy(zipped)
         zipped3 = copy.deepcopy(zipped)
         zipped4 = copy.deepcopy(zipped)

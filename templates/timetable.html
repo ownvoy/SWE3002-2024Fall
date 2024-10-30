@@ -11,150 +11,163 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}?after" />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-gray-100">
-    <div class="min-h-screen flex items-center justify-center">
-      <div
-        class="relative flex flex-col items-center bg-white rounded-lg shadow-lg p-8"
-      >
-        <div
-          class="m-8 px-8 py-8 justify-items-center bg-gradient-to-r from-blue-300 to-purple-300 rounded-lg shadow-md"
-        >
+  <body>
+    <div class="perl0 min-h-screen items-center justify-center">
+      <div class="relative flex flex-col items-center">
+        <div class="perl22 m-16 px-8 py-8 justify-items-center">
           <div
-            class="grid grid-flow-col justify-items-center grid-cols-6 pt-8 text-center gap-4"
+            class="grid grid-flow-col justify-items-center grid-cols-6 pt-8 text-center place-items-stretch"
           >
             <div class="justify-items-center">
+              <div class="border-t border-r border-gray-400 w-44 h-8"></div>
               <div
-                class="border-t border-r border-gray-400 w-44 h-8 rounded-t-lg"
-              ></div>
-              <div
-                class="border-t border-r border-gray-300 w-44 h-16 pt-4 rounded-lg bg-white shadow-sm"
+                class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4 pt-4"
               >
                 1 class
               </div>
               <div
-                class="border-t border-r border-gray-300 w-44 h-16 pt-4 rounded-lg bg-white shadow-sm"
+                class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4"
               >
                 2 class
               </div>
               <div
-                class="border-t border-r border-gray-300 w-44 h-16 pt-4 rounded-lg bg-white shadow-sm"
+                class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4"
               >
                 3 class
               </div>
               <div
-                class="border-t border-r border-gray-300 w-44 h-16 pt-4 rounded-lg bg-white shadow-sm"
+                class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4"
               >
                 4 class
               </div>
               <div
-                class="border-t border-r border-gray-300 w-44 h-16 pt-4 rounded-lg bg-white shadow-sm"
+                class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4"
               >
                 5 class
               </div>
               <div
-                class="border-t border-r border-gray-300 w-44 h-16 pt-4 rounded-lg bg-white shadow-sm"
+                class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4"
               >
                 6 class
               </div>
               <div
-                class="border-t border-r border-gray-300 w-44 h-16 pt-4 rounded-lg bg-white shadow-sm"
+                class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4"
               >
                 7 class
               </div>
               <div
-                class="border-t border-r border-gray-300 w-44 h-16 pt-4 rounded-lg bg-white shadow-sm"
+                class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4"
               >
                 8 class
               </div>
               <div
-                class="border-t border-r border-gray-300 w-44 h-16 pt-4 rounded-lg bg-white shadow-sm"
+                class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4"
               >
                 9 class
               </div>
               <div
-                class="border-t border-r border-gray-300 w-44 h-16 pt-4 rounded-lg bg-white shadow-sm"
+                class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4"
               >
                 10 class
               </div>
               <div
-                class="border-t border-r border-gray-300 w-44 h-16 pt-4 rounded-lg bg-white shadow-sm"
+                class="border-t border-r border-gray-400 w-44 perl2 h-16 pt-4"
               >
                 11 class
               </div>
               <div
-                class="border-t border-r border-b border-gray-300 w-44 h-16 pt-4 rounded-b-lg bg-white shadow-sm"
+                class="border-t border-r border-b border-gray-400 w-44 perl2 h-16 pt-4"
               >
                 12 class
               </div>
             </div>
+
+            <script>
+              function toFix(element) {
+                const classData = element.getAttribute("data-class");
+                console.log(classData);
+              }
+            </script>
+
             <div class="justify-items-center">
+              <div class="border-t border-r border-gray-400 w-44 h-8">Mon</div>
+              {% for time, class, text, id in zipped %} {% if "Mon" in time %}
               <div
-                class="border-t border-r border-gray-300 w-44 h-8 bg-purple-200 rounded-t-lg font-semibold"
+                class="{{ class }}"
+                data-class="{{ id|escapejs }}"
+                onclick="toFix(this)"
+                style="cursor: pointer"
               >
-                Mon
+                {{ text }}
               </div>
-              {% for time, class, text in zipped %} {% if "Mon" in time %}
-              <div class="{{ class }} ">{{ text }}</div>
               {% endif %} {% endfor %}
             </div>
 
             <div class="justify-items-center">
+              <div class="border-t border-r border-gray-400 w-44 h-8">Tue</div>
+              {% for time,class, text, id in zipped2 %} {% if "Tue" in time %}
               <div
-                class="border-t border-r border-gray-300 w-44 h-8 bg-purple-200 rounded-t-lg font-semibold"
+                class="{{ class }}"
+                data-class="{{ id|escapejs }}"
+                onclick="toFix(this)"
+                style="cursor: pointer"
               >
-                Tue
+                {{ text }}
               </div>
-              {% for time, class, text in zipped2 %} {% if "Tue" in time %}
-              <div class="{{ class }} ">{{ text }}</div>
               {% endif %} {% endfor %}
             </div>
 
             <div class="justify-items-center">
+              <div class="border-t border-r border-gray-400 w-44 h-8">Wed</div>
+              {% for time,class, text, id in zipped3 %} {% if "Wed" in time %}
               <div
-                class="border-t border-r border-gray-300 w-44 h-8 bg-purple-200 rounded-t-lg font-semibold"
+                class="{{ class }}"
+                data-class="{{ id|escapejs }}"
+                onclick="toFix(this)"
+                style="cursor: pointer"
               >
-                Wed
+                {{ text }}
               </div>
-              {% for time, class, text in zipped3 %} {% if "Wed" in time %}
-              <div class="{{ class }} ">{{ text }}</div>
               {% endif %} {% endfor %}
             </div>
 
             <div class="justify-items-center">
+              <div class="border-t border-r border-gray-400 w-44 h-8">Thu</div>
+              {% for time,class, text, id in zipped4 %} {% if "Thu" in time %}
               <div
-                class="border-t border-r border-gray-300 w-44 h-8 bg-purple-200 rounded-t-lg font-semibold"
+                class="{{ class }}"
+                data-class="{{ id|escapejs }}"
+                onclick="toFix(this)"
+                style="cursor: pointer"
               >
-                Thu
+                {{ text }}
               </div>
-              {% for time, class, text in zipped4 %} {% if "Thu" in time %}
-              <div class="{{ class }} ">{{ text }}</div>
               {% endif %} {% endfor %}
             </div>
 
             <div class="justify-items-center">
+              <div class="border-t border-r border-gray-400 w-44 h-8">Fri</div>
+              {% for time,class, text, id in zipped5 %} {% if "Fri" in time %}
               <div
-                class="border-t border-r border-gray-300 w-44 h-8 bg-purple-200 rounded-t-lg font-semibold"
+                class="{{ class }}"
+                data-class="{{ id|escapejs }}"
+                onclick="toFix(this)"
+                style="cursor: pointer"
               >
-                Fri
+                {{ text }}
               </div>
-              {% for time, class, text in zipped5 %} {% if "Fri" in time %}
-              <div class="{{ class }} ">{{ text }}</div>
               {% endif %} {% endfor %}
             </div>
           </div>
           {% for text, class in icampus %}
-          <div class="{{ class }} bg-green-200 rounded-lg p-4 my-4 shadow-md">
-            {{ text }}
-          </div>
+          <div class="{{ class }}">{{ text }}</div>
           {% endfor %}
         </div>
         <div
           class="relative flex flex-col items-center justify-center overflow-hidden p-8"
         >
           <a onClick="window.location.reload()" style="cursor: pointer">
-            <div
-              class="p-3 font-semibold hover:bg-green-300 bg-green-200 rounded-lg shadow-md transition duration-300 ease-in-out"
-            >
+            <div class="p-3 perl2 font-semibold hover:bg-green-400">
               Recommend another timetable
             </div>
           </a>
