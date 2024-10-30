@@ -352,7 +352,8 @@ class Timetable(APIView):
                         + " "
                         + "font-semibold"
                         + " "
-                        + "text-white"
+                        + "text"
+                        + str(idx + 1)
                         + " "
                         + "pt-2 px-1"
                     )
@@ -365,7 +366,8 @@ class Timetable(APIView):
                         + " "
                         + "h-8"
                         + " "
-                        + "text-white"
+                        + "text"
+                        + str(idx + 1)
                         + " "
                         + "py-2 px-1 pb-2"
                     )

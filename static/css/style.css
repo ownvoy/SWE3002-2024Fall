@@ -23,47 +23,91 @@
 }
 
 .adobe0 {
-  background: #f8ffae;
+background: #f0f7da; /* 파스텔 연녹색 */
 }
 
 .adobe1 {
-  background: #aec6cf;
+background: #b3d9a7; /* 은은한 민트 */
 }
 
 .adobe2 {
-  background: #ffd1dc;
+background: #e8f0c1; /* 밝은 옐로우-그린 */
 }
 
 .adobe3 {
-  background: #ffb347;
+background: #c9e4de; /* 민트빛 파스텔 */
 }
 
 .adobe4 {
-  background: #b39eb5;
+background: #ffebc6; /* 부드러운 살구색 */
 }
 
 .adobe5 {
-  background: #ffb6c1;
+background: #f6d6e2; /* 연분홍빛 */
 }
 
 .adobe6 {
-  background: #ffdac1;
+background: #d0ebdd; /* 그린 그레이 */
 }
 
 .adobe7 {
-  background: #c5e384;
+background: #f4dada; /* 베이비 핑크 */
 }
 
 .adobe8 {
-  background: #fdfd96;
+background: #fff5ba; /* 연한 크림 옐로우 */
 }
 
 .adobe9 {
-  background: #ffdead;
+background: #d4e09b; /* 샐러드 그린 */
 }
 
 .adobe10 {
-  background: #e6e6fa;
+background: #e1f5c4; /* 파스텔 그린 */
+}
+
+.text0 {
+color: #6a7a59; /* 올리브 그레이 */
+}
+
+.text1 {
+color: #4c705e; /* 다크 민트 */
+}
+
+.text2 {
+color: #687d68; /* 소프트 그레이-그린 */
+}
+
+.text3 {
+color: #5c6b73; /* 세련된 블루-그레이 */
+}
+
+.text4 {
+color: #9a5a60; /* 장밋빛 브라운 */
+}
+
+.text5 {
+color: #815c7d; /* 플럼 그레이 */
+}
+
+.text6 {
+color: #4f5d4f; /* 숲 속 그린 */
+}
+
+.text7 {
+color: #866d7a; /* 로즈베리 */
+}
+
+.text8 {
+color: #877653; /* 딥 샌드 */
+}
+
+.text9 {
+color: #52796f; /* 포레스트 그린 */
+}
+
+.text10 {
+color: #5b6653; /* 스모키 그린 */
 }
 
 input {
