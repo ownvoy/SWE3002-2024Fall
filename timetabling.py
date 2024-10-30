@@ -374,9 +374,9 @@ class Timetabling:
             if self.instructor in course["instructor"]:
                 if random_int == 0:
                     if course["type_of_field"] == "전공":
-                        self.major_credit -= int(course["credit"])
+                        self.major_credit -= int(course["credit"][0])
                     else:
-                        self.liberal_credit -= int(course["credit"])
+                        self.liberal_credit -= int(course["credit"][0])
                     for time in course["classtime2"]:
                         if time not in user_time:
                             return
@@ -413,9 +413,9 @@ class Timetabling:
                     or must_course in course["course_code"]
                 ):
                     if course["type_of_field"] == "전공":
-                        self.major_credit -= int(course["credit"])
+                        self.major_credit -= int(course["credit"][0])
                     else:
-                        self.liberal_credit -= int(course["credit"])
+                        self.liberal_credit -= int(course["credit"][0])
                     for time in course["classtime2"]:
                         user_time_map[time] = 0
                         user_time.remove(time)
@@ -710,7 +710,7 @@ class Timetabling:
                     if course["type_of_field"] == "전공":
                         if self.major_credit <= 0:
                             continue
-                        if int(course["credit"]) < 3:
+                        if int(course["credit"][0]) < 3:
                             continue
                         for time in course["classtime2"]:
                             time_class = re.sub(r"[^0-9]", "", time)
@@ -727,7 +727,7 @@ class Timetabling:
                         print(course)
                         self.daycounting(course)
                         self.duplicate_remove(course["course_title"], possible)
-                        self.major_credit -= int(course["credit"])
+                        self.major_credit -= int(course["credit"][0])
                         print("major_credit: ", self.major_credit)
                         break
                     else:
@@ -735,7 +735,7 @@ class Timetabling:
                             self.liberal_remove(possible)
                             continue
                         if self.liberal_credit <= 3:
-                            if int(course["credit"]) != self.liberal_credit:
+                            if int(course["credit"][0]) != self.liberal_credit:
                                 continue
                         for time in course["classtime2"]:
                             time_class = re.sub(r"[^0-9]", "", time)
@@ -752,7 +752,7 @@ class Timetabling:
                         print(course)
                         self.daycounting(course)
                         self.duplicate_remove(course["course_title"], possible)
-                        self.liberal_credit -= int(course["credit"])
+                        self.liberal_credit -= int(course["credit"][0])
                         print("liberal_credit: ", self.liberal_credit)
                         break
                 break
