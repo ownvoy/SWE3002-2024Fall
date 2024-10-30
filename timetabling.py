@@ -141,8 +141,8 @@ class Timetabling:
 
     # This function is deciding the day when the student goes to school.
     def school_day(self, possible):
-        print("not time", self.not_time)
-        print("day_list", self.day_list)
+        # print("not time", self.not_time)
+        # print("day_list", self.day_list)
 
         remove_idx = []
         for i, day in enumerate(self.day_list):
@@ -152,7 +152,7 @@ class Timetabling:
         for i in remove_idx_reverse:
             self.exceptday.append(self.day_list[i])
             self.day_list.pop(i)
-        print("Possible day: ", self.day_list)
+        # print("Possible day: ", self.day_list)
         if self.five_days_a_week == 0:
             random.shuffle(self.day_list)
             if len(self.day_list) == 5:
@@ -392,11 +392,39 @@ class Timetabling:
                             user_time_map, time_day, time_class
                         )
                     self.recommend.append(course)
-                    print(course)
-                    print("여기야?")
+                    # print(course)
+                    # print("여기야?")
                     self.daycounting(course)
                     self.duplicate_remove(course["course_title"], possible)
                     break
+
+    def fix_take(self, user_time_map, user_time, possible, fixs):
+        for fix in fixs:
+            for course in possible:
+                if fix["course_id"] == course["course_id"]:
+                    print("hi")
+                    if course["type_of_field"] == "전공":
+                        self.major_credit -= int(course["credit"][0])
+                    else:
+                        self.liberal_credit -= int(course["credit"][0])
+                    for time in course["classtime2"]:
+                        print(time)
+                        print("-----")
+                        user_time_map[time] = 0
+                        user_time.remove(time)
+                        time_class = re.sub("[^0-9]", "", time)
+                        time_day = re.sub("[0-9]", "", time)
+                        user_time_map = self.adjust_weight2(
+                            user_time_map, time_day, time_class
+                        )
+                        user_time_map = self.adjust_weight(
+                            user_time_map, time_day, time_class
+                        )
+
+                    self.recommend.append(course)
+                    # print(course)
+                    self.daycounting(course)
+                    self.duplicate_remove(course["course_title"], possible)
 
     # This function makes students take the subjects they must take.
     def must_take(self, user_time_map, user_time, possible):
@@ -429,11 +457,11 @@ class Timetabling:
                         )
 
                     self.recommend.append(course)
-                    print(course)
+                    # print(course)
                     self.daycounting(course)
                     self.duplicate_remove(course["course_title"], possible)
 
-    def timetable(self, possible):
+    def timetable(self, possible, fix):
         user_time_map = {
             "Mon11": randint(1, 500),
             "Mon12": randint(1, 500),
@@ -681,6 +709,10 @@ class Timetabling:
         self.preprocessing(possible)
         self.credit_classify()
         random.shuffle(possible)
+        print("-------------------")
+        print(fix)
+        if fix is not None:
+            self.fix_take(user_time_map, user_time, possible, fix)
         if self.course_must != "":
             self.must_take(user_time_map, user_time, possible)
         if self.instructor != "":
@@ -724,11 +756,11 @@ class Timetabling:
                                 user_time_map, time_day, time_class
                             )
                         self.recommend.append(course)
-                        print(course)
+                        # print(course)
                         self.daycounting(course)
                         self.duplicate_remove(course["course_title"], possible)
                         self.major_credit -= int(course["credit"][0])
-                        print("major_credit: ", self.major_credit)
+                        # print("major_credit: ", self.major_credit)
                         break
                     else:
                         if self.liberal_credit <= 0:
@@ -749,11 +781,11 @@ class Timetabling:
                                 user_time_map, time_day, time_class
                             )
                         self.recommend.append(course)
-                        print(course)
+                        # print(course)
                         self.daycounting(course)
                         self.duplicate_remove(course["course_title"], possible)
                         self.liberal_credit -= int(course["credit"][0])
-                        print("liberal_credit: ", self.liberal_credit)
+                        # print("liberal_credit: ", self.liberal_credit)
                         break
                 break
 

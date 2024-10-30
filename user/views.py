@@ -1,14 +1,22 @@
 import copy
+from subject.models import Fix, SkkuSubject
 
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework.views import APIView
-
+from django.views import View
 from sql import SQL
 from timetabling import Timetabling
 
 from .models import Info
+
+
+class Registration(View):
+    def get(self, request):
+        return HttpResponse("Registration page")
+
 
 all_time = [
     "Mon11",
@@ -133,28 +141,6 @@ all_time = [
     "Fri122",
 ]
 
-class Registration(APIView):
-    def get(self, request):
-        return render(request, "registration.html")
-    
-    def post(self, request):
-        login_id = request.POST.get("login_id")
-        request.session["login_id"] = login_id
-        login_password = request.POST.get("login_password")
-        student_name = request.POST.get("student_name")
-        student_id = request.POST.get("student_id")
-        major = request.POST.get("major")
-        double_major = request.POST.get("double_major")
-        triple_major = request.POST.get("triple_major")
-        student_grade = request.POST.get("student_grade")
-
-        # double_major와 triple_major 값이 "X"이거나 빈칸일 때 None으로 처리
-        double_major = None if not double_major.strip() else double_major
-        triple_major = None if not triple_major.strip() else triple_major
-
-        sql = SQL()
-        sql.user_register(login_id, login_password, student_name, student_id, major, double_major, triple_major, student_grade)
-        return HttpResponseRedirect("/")
 
 class Login(APIView):
     # when get started button is clicked, this function is called
@@ -165,10 +151,6 @@ class Login(APIView):
     # if user successfully signed in, we will find the course that user can take
     # Then, redirect to survey page
     def post(self, request):
-        action = request.POST.get("action")
-        if action == "signup":
-            return HttpResponseRedirect("/registration/")
-
         login_id = request.POST.get("login_id")
         request.session["login_id"] = login_id
         login_password = request.POST.get("login_password")
@@ -274,9 +256,28 @@ class Timetable(APIView):
     # text_list is the list of  courses' name, professor, etc.
     def get(self, request):
         possible = request.session.get("possible")
+        student_id = request.session.get("student_id")
         student_info = request.session.get("student_info")
         timetabling = Timetabling(student_info)
-        timetable = timetabling.timetable(possible)
+        fixed_courses = Fix.objects.filter(student_id=student_id).values_list(
+            "course_id", flat=True
+        )
+
+        # course_id 목록에 맞는 SkkuSubject 테이블에서 모든 필드 정보를 가져오기
+        fix_course = SkkuSubject.objects.filter(course_id__in=fixed_courses)
+
+        # SkkuSubject의 모든 필드를 딕셔너리 형태로 변환하여 `course_info` 리스트에 추가
+        fix_course_infos = [
+            {
+                field.name: getattr(subject, field.name)
+                for field in subject._meta.fields
+                if field.name != "_state"
+            }
+            for subject in fix_course
+        ]
+
+        # Django ORM이 추가한 _state 필드를 제거하여 순수한 필드만 남김
+        timetable = timetabling.timetable(possible, fix_course_infos)
         text_dict = {}
         icampus = []
 
@@ -297,8 +298,6 @@ class Timetable(APIView):
         icam_class_list = icam_class_dict.values()
 
         icam_zipped = zip(icam_text_list, icam_class_list)
-
-
 
         for t in all_time:
             text_dict[t] = " "
@@ -330,7 +329,6 @@ class Timetable(APIView):
                 elif idx == 5:
                     if len(new_english_title) > 2:
                         text_dict[time] = new_english_title[2]
-                
 
         text_list = text_dict.values()
 
@@ -378,15 +376,14 @@ class Timetable(APIView):
         print("aa")
         print()
         print(course["course_id"])
-        
-        id_dict={}
+
+        id_dict = {}
         for t in all_time:
             id_dict[t] = " "
-        
+
         for course in timetable:
             for idx, time in enumerate(course["classtime2"]):
-                    id_dict[time]=course["course_id"]
-
+                id_dict[time] = course["course_id"]
 
         id_list = id_dict.values()
 

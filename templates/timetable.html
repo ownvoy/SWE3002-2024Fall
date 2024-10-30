@@ -1,13 +1,12 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Timetable</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?after" />
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title>Timetable</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?after">
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-green-100 merriweather-font">
@@ -84,6 +83,31 @@
                 12 class
               </div>
             </div>
+                <script>
+                    function toFix(element) {
+                        const courseId = element.getAttribute("data-class");  // course_id 가져오기
+                        console.log(courseId);
+
+                        // AJAX 요청으로 서버에 데이터 전송
+                        fetch('/subject/toggle_fix/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': '{{ csrf_token }}'
+                            },
+                            body: JSON.stringify({ course_id: courseId })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert(data.message);
+                            } else {
+                                alert("작업 중 오류가 발생했습니다.");
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                    }
+                </script>
 
             <div class="justify-items-center">
               <div class="border-t border-r border-gray-400 w-full h-8">Mon</div>
@@ -158,16 +182,13 @@
           <div class="{{ class }}">{{ text }}</div>
           {% endfor %}
         </div>
-        <div
-          class="relative flex flex-col items-center justify-center overflow-hidden p-8"
-        >
-          <a onClick="window.location.reload()" style="cursor: pointer">
-            <div class="p-3 perl2 font-semibold hover:bg-green-400">
-              Recommend another timetable
-            </div>
-          </a>
+        <div class="relative flex  flex-col items-center justify-center overflow-hidden  p-8 ">
+            <a onClick="window.location.reload()" style="cursor: pointer;">
+                <div class=" p-3 perl2 font-semibold hover:bg-green-400">Recommend another timetable</div>
+            </a>
+
         </div>
-      </div>
     </div>
-  </body>
+</div>
+</body>
 </html>

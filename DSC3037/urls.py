@@ -13,8 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from DSC3037.views import Main
 from user.views import Login, Survey, Timetable, Registration
@@ -30,5 +31,5 @@ urlpatterns = [
     # http://localhost:8000/user/login으로 접속하면 Login.as_view()가 실행된다.
     path("survey/", Survey.as_view(), name="survey"),
     path("timetable/", Timetable.as_view(), name="timetable"),
-
+    path("subject/", include("subject.urls")),
 ]

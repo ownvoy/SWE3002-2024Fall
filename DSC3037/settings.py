@@ -94,9 +94,12 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "swe3002",
         "USER": "root",
-        "PASSWORD": "0513",
+        "PASSWORD": "1234",
         "HOST": "localhost",
         "PORT": "",
+        "OPTIONS": {
+            "unix_socket": "/var/lib/mysql/mysql.sock",
+        },
     }
 }
 
