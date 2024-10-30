@@ -4,28 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입 페이지</title>
-    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <div class="signup-container">
-      <h2>회원가입</h2>
-      <form method="post">
+  <body class="bg-green-50 flex items-center justify-center min-h-screen">
+    <div
+      class="signup-container w-full max-w-md bg-white p-8 rounded-lg shadow-lg"
+    >
+      <h2 class="text-2xl font-bold mb-6 text-green-700 text-center">
+        회원가입
+      </h2>
+      <form method="post" class="space-y-4">
         <div class="form-group">
-          <label for="student_name">이름:</label>
-          <input type="text" id="student_name" name="student_name" required />
+          <label
+            for="student_name"
+            class="block text-sm font-medium text-gray-700"
+            >이름:</label
+          >
+          <input
+            type="text"
+            id="student_name"
+            name="student_name"
+            required
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+          />
         </div>
         <div class="form-group">
-          <label for="student_id">학번:</label>
-          <input type="number" id="student_id" name="student_id" required />
+          <label
+            for="student_id"
+            class="block text-sm font-medium text-gray-700"
+            >학번:</label
+          >
+          <input
+            type="number"
+            id="student_id"
+            name="student_id"
+            required
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+          />
         </div>
         <div class="form-group">
-          <label for="major">전공:</label>
+          <label for="major" class="block text-sm font-medium text-gray-700"
+            >전공:</label
+          >
           <input
             list="majors"
             id="major"
             name="major"
             placeholder="전공을 입력하세요"
             required
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
           />
           <datalist id="majors">
             <option value="생명산업공학전공"></option>
@@ -132,12 +159,17 @@
           </datalist>
         </div>
         <div class="form-group">
-          <label for="double_major">부전공:</label>
+          <label
+            for="double_major"
+            class="block text-sm font-medium text-gray-700"
+            >부전공:</label
+          >
           <input
             list="double_majors"
             id="double_major"
             name="double_major"
             placeholder="없으면 비워주세요"
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
           />
           <datalist id="double_majors">
             <option value="생명산업공학전공"></option>
@@ -244,12 +276,17 @@
           </datalist>
         </div>
         <div class="form-group">
-          <label for="triple_major">3전공:</label>
+          <label
+            for="triple_major"
+            class="block text-sm font-medium text-gray-700"
+            >3전공:</label
+          >
           <input
             list="triple_majors"
             id="triple_major"
             name="triple_major"
             placeholder="없으면 비워주세요"
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
           />
           <datalist id="triple_majors">
             <option value="생명산업공학전공"></option>
@@ -356,13 +393,18 @@
           </datalist>
         </div>
         <div class="form-group">
-          <label for="student_grade">학년:</label>
+          <label
+            for="student_grade"
+            class="block text-sm font-medium text-gray-700"
+            >학년:</label
+          >
           <input
             list="grades"
             id="student_grade"
             name="student_grade"
             placeholder="학년을 입력하세요"
             required
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
           />
           <datalist id="grades">
             <option value="1"></option>
@@ -371,21 +413,38 @@
             <option value="4"></option>
           </datalist>
         </div>
-
         <div class="form-group">
-          <label for="login_id">ID:</label>
-          <input type="text" id="login_id" name="login_id" required />
+          <label for="login_id" class="block text-sm font-medium text-gray-700"
+            >ID:</label
+          >
+          <input
+            type="text"
+            id="login_id"
+            name="login_id"
+            required
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+          />
         </div>
         <div class="form-group">
-          <label for="login_password">비밀번호:</label>
+          <label
+            for="login_password"
+            class="block text-sm font-medium text-gray-700"
+            >비밀번호:</label
+          >
           <input
-            type="login_password"
+            type="password"
             id="login_password"
             name="login_password"
             required
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
           />
         </div>
-        <button type="submit">가입하기</button>
+        <button
+          type="submit"
+          class="w-full py-2 px-4 bg-green-600 text-white font-bold rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+        >
+          가입하기
+        </button>
       </form>
     </div>
   </body>

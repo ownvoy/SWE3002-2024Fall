@@ -1,0 +1,83 @@
+.adobe1 {
+  background: #aec6cf;
+}
+
+.adobe2 {
+  background: #ffd1dc;
+}
+
+.adobe3 {
+  background: #ffb347;
+}
+
+.adobe4 {
+  background: #b39eb5;
+}
+
+.adobe5 {
+  background: #ffb6c1;
+}
+
+.adobe6 {
+  background: #ffdac1;
+}
+
+.adobe7 {
+  background: #c5e384;
+}
+
+.adobe8 {
+  background: #fdfd96;
+}
+
+.adobe9 {
+  background: #ffdead;
+}
+
+.adobe10 {
+  background: #e6e6fa;
+}
+
+input {
+  width: 80%;
+  height: 40px;
+  font-size: 14px;
+  border: 0;
+  outline: none;
+}
+
+[type="radio"] {
+  appearance: none;
+  border: max(2px, 0.1em) solid gray;
+  border-radius: 50%;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+[type="radio"]:checked {
+  border: 0.4em solid cadetblue;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input#pick1[type="radio"] + label {
+  background-image: url("https://user-images.githubusercontent.com/96481582/202837141-1badf56a-bc08-47c4-ac46-82413c05fe6e.png");
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+  padding: 0 0 0 0px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input#pick2[type="radio"] + label {
+  background-image: url("https://user-images.githubusercontent.com/96481582/202837179-75f7a28b-f7af-42f1-99e3-6804a8bcf360.png");
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+  padding: 0 0 0 0px;
+}
