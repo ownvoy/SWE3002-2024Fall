@@ -337,7 +337,7 @@ class Timetable(APIView):
         class_dict = {}
 
         for t in all_time:
-            class_dict[t] = "border-t border-r border-gray-400 h-8 w-44"
+            class_dict[t] = "border-t border-r border-gray-400 h-8 w-full"
             if "122" in t:
                 class_dict[t] += " border-b"
 
@@ -348,7 +348,7 @@ class Timetable(APIView):
                         "adobe"
                         + str(idx + 1)
                         + " "
-                        + "w-44"
+                        + "w-full"  # 반응형 너비 설정
                         + " "
                         + "font-semibold"
                         + " "
@@ -361,7 +361,7 @@ class Timetable(APIView):
                         "adobe"
                         + str(idx + 1)
                         + " "
-                        + "w-44"
+                        + "w-full"
                         + " "
                         + "h-8"
                         + " "
@@ -369,6 +369,7 @@ class Timetable(APIView):
                         + " "
                         + "py-2 px-1 pb-2"
                     )
+
 
         class_list = class_dict.values()
 

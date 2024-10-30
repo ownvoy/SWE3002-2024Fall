@@ -1,0 +1,322 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Survey</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?after" />
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}?after" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!--Replace with your tailwind.css once created-->
+    <style>
+      .max-h-64 {
+        max-height: 16rem;
+      }
+
+      /*Quick overrides of the form input as using the CDN version*/
+      .form-input,
+      .form-textarea,
+      .form-select,
+      .form-multiselect {
+        background-color: #edf2f7;
+      }
+
+      .form-checkbox {
+        border-radius: 0.25rem; /* 모서리를 약간 둥글게 */
+      }
+    </style>
+  </head>
+
+  <body class="perl22 mx-12">
+    <!--Section container-->
+    <div class="w-full">
+      <form method="post">
+        {% csrf_token %}
+        <!--Title-->
+        <h1
+          class="flex items-center font-bold text-gray-700 px-2 text-3xl mt-12 font-bold"
+        >
+          Hello {{ user.login_id }}!!
+        </h1>
+        <div class="text-xl">
+          <p class="text-gray-700 px-2">
+            Let me gather some data for the best recommendation.
+          </p>
+        </div>
+
+        <!--divider-->
+        <hr class="color-black my-12" />
+
+        <!--Title-->
+        <h2
+          id="section1"
+          class="font-sans font-bold break-normal text-gray-700 px-2 pb-8 text-xl"
+        >
+          Section 1
+        </h2>
+
+        <!--Card-->
+        <div class="p-8 mt-6 leading-normal rounded shadow bg-white">
+          <p class="text-gray-700 text-xl">
+            How much credit do you want to take?
+          </p>
+
+          <select
+            name="credit"
+            class="form-select block w-full focus:bg-white mt-3"
+            id="credit"
+          >
+            <option value="15">Default(15)</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+          </select>
+        </div>
+        <!--/Card-->
+
+        <!--divider-->
+        <hr class="color-black my-12" />
+
+        <!--Title-->
+        <h2 class="font-bold break-normal text-gray-700 px-2 pb-8 text-xl">
+          Section 2
+        </h2>
+
+        <!--Card-->
+        <div class="p-8 mt-6 leading-normal rounded shadow bg-white">
+          <p class="text-gray-700 text-xl">
+            Please write down the subjects you must take.
+          </p>
+
+          <input
+            name="course"
+            class="form-input block w-full focus:bg-white mt-3"
+            id="course"
+            type="text"
+            value=""
+          />
+          <p class="py-2 text-sm text-gray-600">
+            write the course name or course code
+          </p>
+          <p class="py-2 text-sm text-gray-600">
+            If you want multiple courses, please separate them with commas.
+          </p>
+          <p class="text-sm text-gray-600">ex) DSC3037, DSC3033</p>
+        </div>
+        <!--divder-->
+        <hr class="color-black my-12" />
+        <h2 class="font-bold break-normal text-gray-700 px-2 pb-8 text-xl">
+          Section 3
+        </h2>
+
+        <!--Card-->
+        <div class="p-8 mt-6 leading-normal rounded shadow bg-white">
+          <p class="text-gray-700 text-xl">
+            What kind of time table do you like
+          </p>
+          <div class="flex flex-wrap mt-3 flex justify-around">
+            <img
+              src="https://user-images.githubusercontent.com/96481582/202972550-6507f889-1fa3-4864-a4ce-24417dfba6fb.png"
+              width="50%"
+              height="50%"
+            />
+            <img
+              src="https://user-images.githubusercontent.com/96481582/202972664-00357512-e11a-472e-a3aa-6d00c38f03b3.png"
+              width="50%"
+              height="50%"
+            />
+
+            <select
+              name="density"
+              class="form-select block w-full focus:bg-white mt-3"
+              id="density"
+            >
+              <option value="1">Default(Left)</option>
+              <option value="1">Left</option>
+              <option value="0">Right</option>
+            </select>
+          </div>
+        </div>
+        <!--divider-->
+        <hr class="color-black my-12" />
+        <h2 class="font-bold break-normal text-gray-700 px-2 pb-8 text-xl">
+          Section 4
+        </h2>
+
+        <!--Card-->
+        <div class="p-8 mt-6 leading-normal rounded shadow bg-white">
+          <p class="text-gray-700 text-xl">
+            Can you get up early in the morning?
+          </p>
+          <div class="flex flex-wrap mt-3 flex justify-left">
+            <img
+              src="https://user-images.githubusercontent.com/96481582/202984670-6c44034a-28e0-4692-ba2d-075eaf3fed3f.png"
+              width="15%"
+              height="15%"
+            />
+
+            <select
+              name="morning"
+              class="form-select block w-full focus:bg-white mt-3"
+              id="morning"
+            >
+              <option value="1">Default(Yes)</option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="color-black my-12" />
+        <h2 class="font-bold break-normal text-gray-700 px-2 pb-8 text-xl">
+          Section 5
+        </h2>
+
+        <!--Card-->
+        <div class="p-8 mt-6 leading-normal rounded shadow bg-white">
+          <p class="text-gray-700 text-xl">Do you have a favorite professor?</p>
+          <p class="py-2 text-sm text-gray-600">write the professor's name</p>
+          <input
+            name="professor"
+            class="form-input block w-full focus:bg-white mt-3"
+            id="professor"
+            type="text"
+            value=""
+          />
+        </div>
+
+        <!--divider-->
+        <hr class="color-black my-12" />
+        <h2 class="font-bold break-normal text-gray-700 px-2 pb-8 text-xl">
+          Section 6
+        </h2>
+
+        <!--Card-->
+        <div class="p-8 mt-6 leading-normal rounded shadow bg-white">
+          <p class="text-gray-700 text-xl">
+            What day do you not want to go school
+          </p>
+
+          <div class="flex flex-col mt-2">
+            <div>
+              <label class="inline-flex items-center">
+                <input
+                  name="mon"
+                  type="checkbox"
+                  class="form-checkbox text-green-600"
+                  id="mon"
+                  value="mon"
+                />
+                <span class="ml-2">Mon</span>
+              </label>
+            </div>
+            <div>
+              <label class="inline-flex items-center">
+                <input
+                  name="tue"
+                  type="checkbox"
+                  class="form-checkbox text-green-600"
+                  id="tue"
+                  value="tue"
+                />
+                <span class="ml-2">Tue</span>
+              </label>
+            </div>
+            <div>
+              <label class="inline-flex items-center">
+                <input
+                  name="wed"
+                  type="checkbox"
+                  class="form-checkbox text-green-600"
+                  id="wed"
+                  value="wed"
+                />
+                <span class="ml-2">Wed</span>
+              </label>
+            </div>
+            <div>
+              <label class="inline-flex items-center">
+                <input
+                  name="thu"
+                  type="checkbox"
+                  class="form-checkbox text-green-600"
+                  id="thu"
+                  value="thu"
+                />
+                <span class="ml-2">Thu</span>
+              </label>
+            </div>
+            <div>
+              <label class="inline-flex items-center">
+                <input
+                  name="fri"
+                  type="checkbox"
+                  class="form-checkbox text-green-600 border-1"
+                  id="fri"
+                  value="fri"
+                />
+                <span class="ml-2">Fri</span>
+              </label>
+            </div>
+            <p class="py-2 text-sm text-gray-600">
+              You can't pick more than three dates
+            </p>
+          </div>
+        </div>
+        <!--divider-->
+        <hr class="color-black my-12" />
+        <h2 class="font-bold break-normal text-gray-700 px-2 pb-8 text-xl">
+          Section 7
+        </h2>
+
+        <!--Card-->
+        <div class="p-8 mt-6 leading-normal rounded shadow bg-white">
+          <p class="text-gray-700 text-xl">
+            What is the ratio of major and liberal arts
+          </p>
+          <p class="py-2 text-sm text-gray-600">
+            ex) 6:4 indicates 6 majors and 4 liberal arts.
+          </p>
+          <div class="flex flex-wrap mt-3 flex justify-left">
+            <select
+              name="ratio"
+              class="form-select block w-full focus:bg-white mt-3"
+              id="ratio"
+            >
+              <option value="0.8">Default(8:2)</option>
+              <option value="0.3">3:7</option>
+              <option value="0.5">5:5</option>
+              <option value="0.6">6:4</option>
+              <option value="0.8">8:2</option>
+              <option value="1">10:0</option>
+            </select>
+          </div>
+        </div>
+        <div
+          id="sign"
+          class="flex flex-col items-center text-lg my-12 font-bold pt-6 pb-6"
+        >
+          <button
+            type="submit"
+            class="text-center py-1 w-1/5 bg-white hover:bg-green-300"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+      >
+    </div>
+    <!-- Toggle dropdown list -->
+  </body>
+</html>
