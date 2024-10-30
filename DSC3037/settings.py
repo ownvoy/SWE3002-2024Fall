@@ -97,9 +97,6 @@ DATABASES = {
         "PASSWORD": "0513",
         "HOST": "localhost",
         "PORT": "",
-        "OPTIONS": {
-            "unix_socket": "/var/lib/mysql/mysql.sock",
-        },
     }
 }
 
