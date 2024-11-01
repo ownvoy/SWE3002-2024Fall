@@ -14,6 +14,8 @@
         회원가입
       </h2>
       <form method="post" class="space-y-4">
+
+        {% csrf_token %}
         <div class="form-group">
           <label
             for="student_name"

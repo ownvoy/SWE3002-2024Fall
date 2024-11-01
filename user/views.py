@@ -15,7 +15,33 @@ from .models import Info
 
 class Registration(View):
     def get(self, request):
-        return HttpResponse("Registration page")
+        return render(request, "registration.html")
+
+    def post(self, request):
+        login_id = request.POST.get("login_id")
+        request.session["login_id"] = login_id
+        login_password = request.POST.get("login_password")
+        student_name = request.POST.get("student_name")
+        student_id = request.POST.get("student_id")
+        major = request.POST.get("major")
+        double_major = request.POST.get("double_major")
+        triple_major = request.POST.get("triple_major")
+        student_grade = request.POST.get("student_grade")
+        # double_major와 triple_major 값이 "X"이거나 빈칸일 때 None으로 처리
+        double_major = None if not double_major.strip() else double_major
+        triple_major = None if not triple_major.strip() else triple_major
+        sql = SQL()
+        sql.user_register(
+            login_id,
+            login_password,
+            student_name,
+            student_id,
+            major,
+            double_major,
+            triple_major,
+            student_grade,
+        )
+        return HttpResponseRedirect("/")
 
 
 all_time = [
@@ -151,6 +177,10 @@ class Login(APIView):
     # if user successfully signed in, we will find the course that user can take
     # Then, redirect to survey page
     def post(self, request):
+        action = request.POST.get("action")
+        if action == "signup":
+            return HttpResponseRedirect("/registration/")
+
         login_id = request.POST.get("login_id")
         request.session["login_id"] = login_id
         login_password = request.POST.get("login_password")
@@ -316,7 +346,7 @@ class Timetable(APIView):
                             new_english_title.append(s)
 
                 if idx == 0:
-                    text_dict[time] = course["course_title"][0:10]
+                    text_dict[time] = course["course_title"][0:20]
                 elif idx == 1:
                     text_dict[time] = course["instructor"]
                 elif idx == 2:
@@ -369,7 +399,6 @@ class Timetable(APIView):
                         + " "
                         + "py-2 px-1 pb-2"
                     )
-
 
         class_list = class_dict.values()
 

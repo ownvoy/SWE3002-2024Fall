@@ -81,18 +81,37 @@ class SQL:
             columns = [col[0] for col in cursor.description]
             return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
-    def user_register(self, login_id, login_password, student_name, student_id, major, double_major, triple_major, student_grade):
+    def user_register(
+        self,
+        login_id,
+        login_password,
+        student_name,
+        student_id,
+        major,
+        double_major,
+        triple_major,
+        student_grade,
+    ):
         with connection.cursor() as cursor:
             cursor.execute(
                 """
                 INSERT INTO student_academic (student_name, student_id, major, double_major, triple_major, student_grade)
                 VALUES (%s, %s, %s, %s, %s, %s)
-                """, [student_name, student_id, major, double_major, triple_major, student_grade]
+                """,
+                [
+                    student_name,
+                    student_id,
+                    major,
+                    double_major,
+                    triple_major,
+                    student_grade,
+                ],
             )
             cursor.execute(
                 """
                 INSERT INTO user_info (student_id, login_id, login_password)
                 VALUES (%s, %s, %s)
-                """, [student_id, login_id, login_password]
+                """,
+                [student_id, login_id, login_password],
             )
             return True

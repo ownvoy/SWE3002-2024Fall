@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>timetabling</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<div class=" gradiant relative flex flex-col min-h-screen   items-center justify-center bg-green-100 p-8 ">
+    <div class=" w-4/5  font-bold  p-8 text-5xl text-center">Rapidly recommend your timetable of SKKU without time
+        consuming
+    </div>
+    <div class=" w-4/5  font-base font-mono italic text-center">It is generated based on various information such as
+        your life pattern, part-time job time, major etc.
+    </div>
+    <a href=login>
+        <div class=" w-1/8  p-4 m-8 font-bold text-center rounded-md bg-green-100 hover:bg-green-300">get started</div>
+    </a>
+</div>
+</body>
+</html>
