@@ -473,7 +473,30 @@ class Timetable(APIView):
 
         id_list = id_dict.values()
 
+        print(f"fixed-course:{fixed_courses}")
         zipped = zip(all_time, class_list, text_list, id_list)
+        zipped_list = list(zip(all_time, class_list, text_list, id_list))
+        # print(list(zipped))
+        updated_zipped = [
+            (
+                time,
+                class_name + (" fixed-course" if course_id in fixed_courses else ""),
+                text,
+                course_id,
+            )
+            for time, class_name, text, course_id in zipped_list
+        ]
+
+        # 템플릿에서 사용하기 위해 다시 zip 형태로 변환
+        updated_zipped = zip(
+            [item[0] for item in updated_zipped],
+            [item[1] for item in updated_zipped],
+            [item[2] for item in updated_zipped],
+            [item[3] for item in updated_zipped],
+        )
+
+        print(list(updated_zipped))
+        print(updated_zipped)
         zipped2 = copy.deepcopy(zipped)
         zipped3 = copy.deepcopy(zipped)
         zipped4 = copy.deepcopy(zipped)
