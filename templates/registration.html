@@ -13,7 +13,7 @@
       <h2 class="text-2xl font-bold mb-6 text-green-700 text-center">
         회원가입
       </h2>
-      <form method="post" class="space-y-4">
+      <form id='studentForm' method="post" class="space-y-4">
 
         {% csrf_token %}
         <div class="form-group">
@@ -449,5 +449,20 @@
         </button>
       </form>
     </div>
+    <script>
+      const form = document.getElementById('studentForm');
+
+      form.addEventListener('submit', (event) => {
+        const studentIdInput = document.getElementById('student_id');
+        const value = studentIdInput.value;
+
+        // 학번이 10자리인지 확인
+        if (value.length !== 10 || isNaN(value)) {
+          alert('학번은 반드시 10자리 숫자여야 합니다.');
+          event.preventDefault(); // 폼 제출 방지
+        }
+      });
+    </script>
+    
   </body>
 </html>
