@@ -18,12 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 from DSC3037.views import Main
-from user.views import Login, Survey, Timetable, Registration
+from user.views import Login, Survey, Timetable, Registration, History
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", Main.as_view()),
     path("registration/", Registration.as_view()),
+    path("history/", History.as_view()),
     path("login/", Login.as_view()),
     # 아래와 같이하면 user/urls.py의 urlpatterns가 실행된다.
     # ㄴ path("user/", include("user.urls")),

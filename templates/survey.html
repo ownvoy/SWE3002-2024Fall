@@ -37,16 +37,30 @@
       <form method="post">
         {% csrf_token %}
         <!--Title-->
-        <h1
-          class="flex items-center font-bold text-gray-700 px-2 text-3xl mt-12 font-bold"
-        >
-          Hello {{ user.login_id }}!!
-        </h1>
-        <div class="text-xl">
-          <p class="text-gray-700 px-2">
-            Let me gather some data for the best recommendation.
-          </p>
+        <div class="flex justify-between items-start mt-12 px-4">
+          <!-- 왼쪽 텍스트 콘텐츠 -->
+          <div class="flex flex-col space-y-4">
+            <h1 class="font-bold text-gray-700 text-3xl">
+              Hello {{ user.login_id }}!!
+            </h1>
+            <p class="text-gray-700 text-xl">
+              Let me gather some data for the best recommendation.
+            </p>
+          </div>
+        
+          <!-- 오른쪽 버튼 -->
+          <div class="flex items-center">
+            <button
+              type="submit"
+              name="action"
+              value="history"
+              class="py-2 px-4 bg-white hover:bg-green-300 text-center border rounded-md"
+            >
+              기수강 강의 제외 (선택)
+            </button>
+          </div>
         </div>
+        
 
         <!--divider-->
         <hr class="color-black my-12" />
@@ -309,6 +323,8 @@
         >
           <button
             type="submit"
+            name="action"
+            value="timetable"
             class="text-center py-1 w-1/5 bg-white hover:bg-green-300"
           >
             Save
