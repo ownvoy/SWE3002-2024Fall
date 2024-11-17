@@ -14,6 +14,16 @@ from timetabling import Timetabling
 
 from .models import Info
 
+import hashlib
+
+
+def get_color_class(course_id):
+    if isinstance(course_id, int):
+        course_id = str(course_id)
+    hash_object = hashlib.md5(course_id.encode())
+    return f"fixed-course{int(hash_object.hexdigest(), 16) % 13 + 1}"
+
+
 class History(View):
     def get(self, request):
         student_id = request.session.get("student_id")
@@ -24,15 +34,25 @@ class History(View):
 
         # 학번에 따른 수강가능한 과목 리스트 가져오기
         possible_subjects = sql.subject_available(student_id)
-        possible_course_titles = list({entry['course_title'] for entry in possible_subjects})
-        possible_course_titles_json = json.dumps(possible_course_titles, ensure_ascii=False)
+        possible_course_titles = list(
+            {entry["course_title"] for entry in possible_subjects}
+        )
+        possible_course_titles_json = json.dumps(
+            possible_course_titles, ensure_ascii=False
+        )
 
         # course_id로 강의 이름 가져오기
         titles = [sql.find_title_by_courseid(course_id) for course_id in course_ids]
-        title_course_pairs = [[title, course_id] for title, course_id in zip(titles, course_ids)]
+        title_course_pairs = [
+            [title, course_id] for title, course_id in zip(titles, course_ids)
+        ]
         title_course_json = json.dumps(title_course_pairs, ensure_ascii=False)
-        
-        return render(request, "history.html", {"titles": title_course_json, "subjects": possible_course_titles_json})
+
+        return render(
+            request,
+            "history.html",
+            {"titles": title_course_json, "subjects": possible_course_titles_json},
+        )
 
     def post(self, request):
         student_id = request.session.get("student_id", 0)
@@ -48,7 +68,7 @@ class History(View):
         print("history post: ", course_id)
         sql.register_subject(".", course_id, student_id)
         return HttpResponseRedirect("/history/")
-    
+
     def delete(self, request):
         try:
             data = json.loads(request.body)
@@ -59,7 +79,9 @@ class History(View):
             success = sql.delete_history(student_id, course_id)
 
             if success:
-                return JsonResponse({"success": True, "message": "Course deleted successfully."})
+                return JsonResponse(
+                    {"success": True, "message": "Course deleted successfully."}
+                )
             else:
                 return JsonResponse({"success": False, "message": "Failed to delete."})
 
@@ -286,7 +308,7 @@ class Survey(APIView):
         action = request.POST.get("action")
         if action == "history":
             return HttpResponseRedirect("/history/")
-    
+
         credit = request.POST.get("credit")
         print(credit)
         course = request.POST.get("course")
@@ -337,6 +359,12 @@ class Survey(APIView):
         return HttpResponseRedirect("/timetable/")
 
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
+from rest_framework.views import APIView
+
+
+@method_decorator(never_cache, name="dispatch")
 class Timetable(APIView):
     # we will show user's timetable
     # class_list is the list of html class name
@@ -478,17 +506,32 @@ class Timetable(APIView):
         zipped_list = list(zip(all_time, class_list, text_list, id_list))
         # print(list(zipped))
         # 템플릿에서 사용하기 위해 다시 zip 형태로 변환
-
         updated_zipped = [
             (
                 time,
-                class_name + (" fixed-course" if course_id in fixed_courses else ""),
+                class_name
+                + (
+                    f" {get_color_class(course_id)}"
+                    if course_id in fixed_courses
+                    else ""
+                ),
                 text,
                 course_id,
             )
-            for time, class_name, text, course_id in zipped_list
+            for i, (time, class_name, text, course_id) in enumerate(zipped_list)
         ]
 
+        #
+        # updated_zipped = [
+        #     (
+        #         time,
+        #         class_name + (" fixed-course" if course_id in fixed_courses else ""),
+        #         text,
+        #         course_id,
+        #     )
+        #     for i, (time, class_name, text, course_id) in enumerate(zipped_list)
+        # ]
+        #
         # 템플릿에서 반복 사용 가능하도록 리스트 형태로 변환
         updated_zipped_list = list(updated_zipped)
         print(list(updated_zipped))

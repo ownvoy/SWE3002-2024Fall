@@ -9,11 +9,73 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}?after">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .fixed-course {
-            background-color: red;
-            color: white;
-        }
-    </style>
+.fixed-course1 {
+    background-color: #6a5acd; /* 중간 정도의 진한 보라색 */
+    color: white;
+}
+
+.fixed-course2 {
+    background-color: #5f9ea0; /* 진한 청록색 */
+    color: white;
+}
+
+.fixed-course3 {
+    background-color: #4682b4; /* 중간 정도의 파란색 */
+    color: white;
+}
+
+.fixed-course4 {
+    background-color: #7b68ee; /* 옅은 남보라색 */
+    color: white;
+}
+
+.fixed-course5 {
+    background-color: #708090; /* 차분한 회청색 */
+    color: white;
+}
+
+.fixed-course6 {
+    background-color: #556b2f; /* 어두운 올리브 그린 */
+    color: white;
+}
+
+.fixed-course7 {
+    background-color: #cd5c5c; /* 적갈색 */
+    color: white;
+}
+
+.fixed-course8 {
+    background-color: #8b0000; /* 어두운 적색 (짙은 빨강) */
+    color: white;
+}
+
+.fixed-course9 {
+    background-color: #228b22; /* 포레스트 그린 */
+    color: white;
+}
+
+.fixed-course10 {
+    background-color: #2f4f4f; /* 다크 슬레이트 그레이 */
+    color: white;
+}
+
+.fixed-course11 {
+    background-color: #d2691e; /* 초콜릿 색상 */
+    color: white;
+}
+
+.fixed-course12 {
+    background-color: #ff8c00; /* 다크 오렌지 */
+    color: black;
+}
+
+.fixed-course13 {
+    background-color: #46845c; /* 어두운 청록색 변형 */
+    color: white;
+}
+
+</style>
+
   </head>
   <body class="bg-green-100 merriweather-font">
     <div class="min-h-screen flex items-center justify-center">
@@ -90,10 +152,10 @@
             </div>
                 <script>
                   function toFix(element) {
-                      const courseId = element.getAttribute("data-class");  // course_id 가져오기
-                      console.log(`Clicked courseId: ${courseId}`);  // 디버깅: 클릭한 course_id 출력
+                      const courseId = element.getAttribute("data-class");  
+                      console.log(`Clicked courseId: ${courseId}`);
 
-                      fetch('/subject/toggle_fix/', {
+                      fetch('/subject/toggle_fix/?_=${new Date().getTime()}', {
                           method: 'POST',
                           headers: {
                               'Content-Type': 'application/json',
@@ -104,25 +166,60 @@
                       .then(response => response.json())
                       .then(data => {
                           if (data.success) {
-                              // 동일한 course_id를 가진 모든 셀 선택
                               const elements = document.querySelectorAll(`[data-class="${courseId}"]`);
-                              console.log(`Elements affected: ${elements.length}`);  // 디버깅: 선택된 요소 수 출력
+                              console.log(`Elements affected: ${elements.length}`);
 
                               elements.forEach(el => {
+                                  el.classList.remove('fixed-course1', 'fixed-course2', 'fixed-course3','fixed-course4','fixed-course5', 'fixed-course6', 'fixed-course7','fixed-course8', 'fixed-course9', 'fixed-course10', 'fixed-course11', 'fixed-course12', 'fixed-course13'); // 기존 색상 클래스 제거
                                   if (data.action === "added") {
-                                      el.classList.add('fixed-course');  // 모든 셀에 fixed-course 클래스 추가
-                                  } else if (data.action === "removed") {
-                                      el.classList.remove('fixed-course');  // 모든 셀에서 fixed-course 클래스 제거
+                                      el.classList.add(data.color_class);  // 서버에서 전달받은 색상 클래스 추가
                                   }
-                              });
+                              }
 
-                              alert(data.message);  // 메시지 표시
+                              );
+
+                              alert(data.message);
                           } else {
                               alert("작업 중 오류가 발생했습니다.");
                           }
                       })
                       .catch(error => console.error('Error:', error));
                   }
+
+                  <!--function toFix(element) {-->
+                  <!--    const courseId = element.getAttribute("data-class");  // course_id 가져오기-->
+                  <!--    console.log(`Clicked courseId: ${courseId}`);  // 디버깅: 클릭한 course_id 출력-->
+                  <!---->
+                  <!--    fetch('/subject/toggle_fix/', {-->
+                  <!--        method: 'POST',-->
+                  <!--        headers: {-->
+                  <!--            'Content-Type': 'application/json',-->
+                  <!--            'X-CSRFToken': '{{ csrf_token }}'-->
+                  <!--        },-->
+                  <!--        body: JSON.stringify({ course_id: courseId })-->
+                  <!--    })-->
+                  <!--    .then(response => response.json())-->
+                  <!--    .then(data => {-->
+                  <!--        if (data.success) {-->
+                  <!--            // 동일한 course_id를 가진 모든 셀 선택-->
+                  <!--            const elements = document.querySelectorAll(`[data-class="${courseId}"]`);-->
+                  <!--            console.log(`Elements affected: ${elements.length}`);  // 디버깅: 선택된 요소 수 출력-->
+                  <!---->
+                  <!--            elements.forEach(el => {-->
+                  <!--                if (data.action === "added") {-->
+                  <!--                    el.classList.add('fixed-course');  // 모든 셀에 fixed-course 클래스 추가-->
+                  <!--                } else if (data.action === "removed") {-->
+                  <!--                    el.classList.remove('fixed-course');  // 모든 셀에서 fixed-course 클래스 제거-->
+                  <!--                }-->
+                  <!--            });-->
+                  <!---->
+                  <!--            alert(data.message);  // 메시지 표시-->
+                  <!--        } else {-->
+                  <!--            alert("작업 중 오류가 발생했습니다.");-->
+                  <!--        }-->
+                  <!--    })-->
+                  <!--    .catch(error => console.error('Error:', error));-->
+                  <!--}-->
                 </script>
 
             <div class="justify-items-center">
