@@ -420,6 +420,8 @@ class Timetable(APIView):
         zipped = zip(all_time, class_list, text_list, id_list)
         zipped_list = list(zip(all_time, class_list, text_list, id_list))
         # print(list(zipped))
+        # 템플릿에서 사용하기 위해 다시 zip 형태로 변환
+
         updated_zipped = [
             (
                 time,
@@ -430,27 +432,21 @@ class Timetable(APIView):
             for time, class_name, text, course_id in zipped_list
         ]
 
-        # 템플릿에서 사용하기 위해 다시 zip 형태로 변환
-        updated_zipped = zip(
-            [item[0] for item in updated_zipped],
-            [item[1] for item in updated_zipped],
-            [item[2] for item in updated_zipped],
-            [item[3] for item in updated_zipped],
-        )
-
+        # 템플릿에서 반복 사용 가능하도록 리스트 형태로 변환
+        updated_zipped_list = list(updated_zipped)
         print(list(updated_zipped))
         print(updated_zipped)
-        zipped2 = copy.deepcopy(zipped)
-        zipped3 = copy.deepcopy(zipped)
-        zipped4 = copy.deepcopy(zipped)
-        zipped5 = copy.deepcopy(zipped)
+        zipped2 = copy.deepcopy(updated_zipped_list)
+        zipped3 = copy.deepcopy(updated_zipped_list)
+        zipped4 = copy.deepcopy(updated_zipped_list)
+        zipped5 = copy.deepcopy(updated_zipped_list)
 
         return render(
             request,
             "timetable.html",
             context={
                 "timetable": timetable,
-                "zipped": zipped,
+                "zipped": updated_zipped_list,
                 "zipped2": zipped2,
                 "zipped3": zipped3,
                 "zipped4": zipped4,
