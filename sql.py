@@ -81,7 +81,7 @@ class SQL:
             columns = [col[0] for col in cursor.description]
             return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
-    def user_register(
+    def register_user(
         self,
         login_id,
         login_password,
@@ -115,3 +115,75 @@ class SQL:
                 [student_id, login_id, login_password],
             )
             return True
+
+    def register_subject(self, semester, course_id, student_id):
+         with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                INSERT INTO student_history (semester, course_id, student_id)
+                VALUES (%s, %s, %s)
+                """,
+                [
+                    semester,
+                    course_id,
+                    student_id,
+                ],
+            )
+            return True
+         
+    def find_courseid_by_title(self, subject):
+        print("in sql", subject)
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """SELECT course_id
+                FROM skku_subject
+                WHERE course_title = (%s)
+                LIMIT 1;""",
+                [ subject ],
+            )
+            results = cursor.fetchall()
+            if results:
+                course_id = results[0][0]  # 첫 번째 튜플의 첫 번째 값
+                print("course_id: ", course_id)
+                return course_id
+            else:
+                print("No results found.")
+                return -1
+        
+    def get_history(self, student_id):
+        with connection.cursor() as cursor:
+            cursor.execute(
+                f"""SELECT course_id
+                FROM student_history
+                WHERE student_id = {student_id};
+                """
+            )
+            columns = [col[0] for col in cursor.fetchall()]
+            return columns
+        
+    def find_title_by_courseid(self, course_id):
+        with connection.cursor() as cursor:
+            cursor.execute(
+                f"""SELECT course_title
+                FROM skku_subject
+                WHERE course_id = {course_id}
+                LIMIT 1;"""
+            )
+            columns = [col[0] for col in cursor.fetchall()]
+            return columns[0]
+        
+    def delete_history(self, student_id, course_id):
+        print(student_id, course_id)
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """DELETE FROM student_history
+                WHERE course_id = %s
+                AND student_id = %s;""",
+                [course_id, student_id],
+            )
+
+            print("result: ", cursor.rowcount)
+            if cursor.rowcount > 0:
+                return 1
+            else:
+                return 0

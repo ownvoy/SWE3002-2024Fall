@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex justify-center items-start bg-green-50 min-h-screen">
+    {% if messages %} {% for message in messages %}
+
+    <script>
+      alert("{{ message }}");
+    </script>
+    {% endfor %} {% endif %}
+
+
+    <div class="container w-full max-w-md text-center bg-white p-5 rounded-lg shadow-lg mt-5 flex flex-col gap-4">
+        <h1 class="text-xl font-semibold text-green-800 mb-3">기수강 과목을 입력해주세요</h1>
+        <form id="subject-form" class="w-full flex flex-col gap-3" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input 
+                    type="text" 
+                    id="subject"
+                    name="subject"
+                    list="subjects"
+                    placeholder="과목을 입력하세요" 
+                    required 
+                    class="w-full p-2 border border-green-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+                />
+                <datalist id="subjects">
+                </datalist>
+            </div>
+            <button 
+            type="submit" 
+            class="w-full p-2 bg-green-700 text-white rounded-md hover:bg-green-800 transition-colors"
+            >
+            추가
+            </button>
+        </form>
+    
+    <!-- 과목들이 추가될 영역 -->
+        <div id="cert-subject-list" class="w-full flex flex-col gap-3" data-titles='{{ titles|safe }}'></div>
+
+        <!-- 뒤로가기 버튼 수정: 특정 라우트로 GET 요청 보내기 -->
+        <button 
+        onclick="window.location.href='/survey/';" 
+        class="w-full p-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors mt-3"
+        >
+        뒤로가기
+        </button>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const alertMessage = urlParams.get('alert');
+    
+        if (alertMessage) {
+        alert(decodeURIComponent(alertMessage)); // 알림 표시
+        }
+
+        // CSRF 토큰 가져오기 함수
+        function getCSRFToken() {
+            const cookieValue = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("csrftoken="))
+                ?.split("=")[1];
+            return cookieValue || "";
+        }
+
+        // 서버에서 전달된 JSON 문자열을 자바스크립트 배열로 파싱
+        var subjects = JSON.parse('{{ subjects|escapejs }}');
+
+        // datalist에 과목 제목을 동적으로 추가
+        var datalist = document.getElementById("subjects");
+        subjects.forEach(function(subject) {
+            var option = document.createElement("option");
+            option.value = subject;
+            datalist.appendChild(option);
+        });
+
+        // 서버에서 전달된 JSON 문자열을 자바스크립트 배열로 파싱
+        var certTitles = JSON.parse('{{ titles|escapejs }}');
+        // 기수강 과목 리스트 관련
+        var certSubjectList = document.getElementById("cert-subject-list");
+        // 기수강 과목 항목 추가
+        certTitles.forEach(function(title_course) {
+            var subjectItem = document.createElement("div");
+            subjectItem.className = "subject-item flex justify-between items-center p-2 bg-green-50 border border-green-200 rounded-md shadow-sm";
+            subjectItem.textContent = title_course[0];
+            subjectItem.dataset.courseId = title_course[1];
+
+            // 삭제 버튼 생성
+            var deleteBtn = document.createElement("button");
+            deleteBtn.className = "delete-btn text-red-500 text-lg px-1 hover:text-red-700 transition-colors";
+            deleteBtn.innerHTML = "×"; // '×' 기호 표시
+
+            deleteBtn.onclick = async function() {
+                // 서버로 삭제 요청
+                const response = await fetch("/history/", {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": getCSRFToken(), // CSRF 토큰 추가
+                        "X-Custom-Type": "delete", // 요청 구분을 위한 커스텀 헤더
+                    },
+                    body: JSON.stringify({course_id : subjectItem.dataset.courseId}),
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success) {
+                        subjectItem.remove(); // 성공 시 항목 삭제
+                        alert("삭제되었습니다.");
+                    } else {
+                        alert("삭제 실패: " + result.message);
+                    }
+                } else {
+                    alert("서버 오류로 삭제할 수 없습니다.");
+                }
+            }; // 클릭 시 항목 삭제
+
+            // 삭제 버튼을 항목에 추가
+            subjectItem.appendChild(deleteBtn);
+
+            // 생성된 항목을 리스트에 추가
+            certSubjectList.appendChild(subjectItem);
+        });
+    </script>
+</body>
+</html>

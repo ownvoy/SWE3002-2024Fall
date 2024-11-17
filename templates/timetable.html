@@ -16,15 +16,14 @@
     </style>
   </head>
   <body class="bg-green-100 merriweather-font">
-    <div class="min-h-screen flex items-center justify-center overflow-x-auto">
+    <div class="min-h-screen flex items-center justify-center">
       <div class="relative flex flex-col items-center p-4 sm:p-6 md:p-8 min-w-full max-w-[960px]">
         <div
-          class="m-4 sm:m-6 md:m-8 p-4 sm:p-6 md:p-8 bg-white rounded-lg shadow-md w-full overflow-hidden"
+          class="m-4 sm:m-6 md:m-8 p-4 sm:p-6 md:p-8 bg-white rounded-lg shadow-md w-full"
         >
-        <div class="text-2xl font-semibold text-center mt-4 p-8">TIME TABLE</div>
+        <div class="text-xl sm:text-2xl font-semibold text-center mt-4 p-4 sm:p-8">TIME TABLE</div>
           <div
-            class="grid grid-cols-6 gap-0 text-center" 
-            style="grid-template-columns: repeat(6, minmax(140px, 1fr));"
+            class="grid grid-cols-6 gap-0 text-center"
           >
             <div class="justify-items-center">
               <div class="border-t border-r border-gray-400 w-full h-8"></div>
@@ -124,10 +123,7 @@
                       })
                       .catch(error => console.error('Error:', error));
                   }
-
-    
-                  
-                                    </script>
+                </script>
 
             <div class="justify-items-center">
               <div class="border-t border-r border-gray-400 w-full h-8">Mon</div>
@@ -203,7 +199,7 @@
           <div class="{{ class }}">{{ text }}</div>
           {% endfor %}
         </div>
-        <div class="relative flex  flex-col items-center justify-center overflow-hidden  p-8 ">
+        <div class="relative flex  flex-col items-center justify-center p-4 sm:p-8 ">
             <a onClick="window.location.reload()" style="cursor: pointer;">
                 <div class=" p-3 perl2 font-semibold hover:bg-green-400">Recommend another timetable</div>
             </a>
@@ -211,5 +207,20 @@
         </div>
     </div>
 </div>
+<script>
+  function adjustZoom() {
+    var width = window.innerWidth;
+    var zoomLevel = 1;
+
+    if (width < 600) { // 화면 너비가 600px보다 작을 때
+      zoomLevel = width / 600;
+    }
+
+    document.body.style.zoom = zoomLevel;
+  }
+
+  window.addEventListener('resize', adjustZoom);
+  window.addEventListener('load', adjustZoom);
+</script>
 </body>
 </html>

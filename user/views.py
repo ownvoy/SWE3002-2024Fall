@@ -1,9 +1,11 @@
 import copy
+import json
 from subject.models import Fix, SkkuSubject
 
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework.views import APIView
 from django.views import View
@@ -11,6 +13,58 @@ from sql import SQL
 from timetabling import Timetabling
 
 from .models import Info
+
+class History(View):
+    def get(self, request):
+        student_id = request.session.get("student_id")
+
+        # 로그인 시 학번 정보로 수강한 course_id 가져오기
+        sql = SQL()
+        course_ids = sql.get_history(student_id)
+
+        # 학번에 따른 수강가능한 과목 리스트 가져오기
+        possible_subjects = sql.subject_available(student_id)
+        possible_course_titles = list({entry['course_title'] for entry in possible_subjects})
+        possible_course_titles_json = json.dumps(possible_course_titles, ensure_ascii=False)
+
+        # course_id로 강의 이름 가져오기
+        titles = [sql.find_title_by_courseid(course_id) for course_id in course_ids]
+        title_course_pairs = [[title, course_id] for title, course_id in zip(titles, course_ids)]
+        title_course_json = json.dumps(title_course_pairs, ensure_ascii=False)
+        
+        return render(request, "history.html", {"titles": title_course_json, "subjects": possible_course_titles_json})
+
+    def post(self, request):
+        student_id = request.session.get("student_id", 0)
+        subject = request.POST.get("subject")
+
+        sql = SQL()
+        # 입력받은 강의 이름으로 course_id 찾기
+        course_id = sql.find_courseid_by_title(subject)
+
+        if course_id == -1:
+            return HttpResponseRedirect("/history/?alert=Invalid+subject+name")
+
+        print("history post: ", course_id)
+        sql.register_subject(".", course_id, student_id)
+        return HttpResponseRedirect("/history/")
+    
+    def delete(self, request):
+        try:
+            data = json.loads(request.body)
+            course_id = data.get("course_id")
+            student_id = request.session.get("student_id", 0)
+
+            sql = SQL()
+            success = sql.delete_history(student_id, course_id)
+
+            if success:
+                return JsonResponse({"success": True, "message": "Course deleted successfully."})
+            else:
+                return JsonResponse({"success": False, "message": "Failed to delete."})
+
+        except Exception as e:
+            return JsonResponse({"success": False, "message": str(e)}, status=500)
 
 
 class Registration(View):
@@ -31,7 +85,7 @@ class Registration(View):
         double_major = None if not double_major.strip() else double_major
         triple_major = None if not triple_major.strip() else triple_major
         sql = SQL()
-        sql.user_register(
+        sql.register_user(
             login_id,
             login_password,
             student_name,
@@ -211,7 +265,6 @@ class Login(APIView):
 
 class Survey(APIView):
     def get(self, request):
-
         login_id = request.session.get("login_id")
         student_id = request.session.get("student_id")
         print(student_id, "asdf")
@@ -230,6 +283,10 @@ class Survey(APIView):
 
     # We will collect user's information and save it in database
     def post(self, request):
+        action = request.POST.get("action")
+        if action == "history":
+            return HttpResponseRedirect("/history/")
+    
         credit = request.POST.get("credit")
         print(credit)
         course = request.POST.get("course")
