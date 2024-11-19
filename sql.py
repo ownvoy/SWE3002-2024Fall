@@ -93,6 +93,11 @@ class SQL:
         student_grade,
     ):
         with connection.cursor() as cursor:
+            # 이미 존재하는 id면 error 처리
+            cursor.execute("SELECT COUNT(*) FROM student_academic WHERE student_id = %s", [student_id])
+            if cursor.fetchone()[0] != 0:
+                return -1
+
             cursor.execute(
                 """
                 INSERT INTO student_academic (student_name, student_id, major, double_major, triple_major, student_grade)
@@ -114,7 +119,7 @@ class SQL:
                 """,
                 [student_id, login_id, login_password],
             )
-            return True
+            return 1
 
     def register_subject_history(self, semester, course_ids, student_id):
          with connection.cursor() as cursor:

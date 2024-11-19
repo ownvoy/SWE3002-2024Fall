@@ -102,7 +102,7 @@ class Registration(View):
         double_major = None if not double_major.strip() else double_major
         triple_major = None if not triple_major.strip() else triple_major
         sql = SQL()
-        sql.register_user(
+        result = sql.register_user(
             login_id,
             login_password,
             student_name,
@@ -112,7 +112,17 @@ class Registration(View):
             triple_major,
             student_grade,
         )
-        return HttpResponseRedirect("/")
+
+        if (result == -1):
+            # 에러가 발생했을 때, 알림을 띄운 후 리다이렉트
+            return HttpResponse("""
+                <script>
+                    alert('이미 존재하는 학번입니다. 다시 입력해주세요.');
+                    window.location.href = '/registration/';  // 리다이렉트 할 URL
+                </script>
+            """)
+        else:
+            return HttpResponseRedirect("/")
 
 
 all_time = [
