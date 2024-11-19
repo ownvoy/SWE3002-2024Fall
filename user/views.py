@@ -20,7 +20,8 @@ class History(View):
 
         # 로그인 시 학번 정보로 수강한 course_id 가져오기
         sql = SQL()
-        course_ids = sql.get_history(student_id)
+        course_ids = sql.get_history_of_student(student_id)
+        print(course_ids)
 
         # 학번에 따른 수강가능한 과목 리스트 가져오기
         possible_subjects = sql.subject_available(student_id)
@@ -28,11 +29,10 @@ class History(View):
         possible_course_titles_json = json.dumps(possible_course_titles, ensure_ascii=False)
 
         # course_id로 강의 이름 가져오기
-        titles = [sql.find_title_by_courseid(course_id) for course_id in course_ids]
-        title_course_pairs = [[title, course_id] for title, course_id in zip(titles, course_ids)]
-        title_course_json = json.dumps(title_course_pairs, ensure_ascii=False)
+        history_titles = list({sql.find_title_by_courseid(course_id) for course_id in course_ids})
+        history_titles_json = json.dumps(history_titles, ensure_ascii=False)
         
-        return render(request, "history.html", {"titles": title_course_json, "subjects": possible_course_titles_json})
+        return render(request, "history.html", {"titles": history_titles_json, "subjects": possible_course_titles_json})
 
     def post(self, request):
         student_id = request.session.get("student_id", 0)
@@ -40,23 +40,24 @@ class History(View):
 
         sql = SQL()
         # 입력받은 강의 이름으로 course_id 찾기
-        course_id = sql.find_courseid_by_title(subject)
+        course_ids = sql.find_courseids_by_title(subject)
 
-        if course_id == -1:
+        if course_ids == -1:
             return HttpResponseRedirect("/history/?alert=Invalid+subject+name")
 
-        print("history post: ", course_id)
-        sql.register_subject(".", course_id, student_id)
+        print("history post: ", course_ids)
+        sql.register_subject_history(".", course_ids, student_id)
         return HttpResponseRedirect("/history/")
     
     def delete(self, request):
         try:
             data = json.loads(request.body)
-            course_id = data.get("course_id")
+            course_title = data.get("course_title")[:-1]
             student_id = request.session.get("student_id", 0)
 
             sql = SQL()
-            success = sql.delete_history(student_id, course_id)
+            course_ids = sql.find_courseids_by_title(course_title)
+            success = sql.delete_history(student_id, course_ids)
 
             if success:
                 return JsonResponse({"success": True, "message": "Course deleted successfully."})

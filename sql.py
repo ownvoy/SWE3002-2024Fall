@@ -116,41 +116,40 @@ class SQL:
             )
             return True
 
-    def register_subject(self, semester, course_id, student_id):
+    def register_subject_history(self, semester, course_ids, student_id):
          with connection.cursor() as cursor:
-            cursor.execute(
-                """
-                INSERT INTO student_history (semester, course_id, student_id)
-                VALUES (%s, %s, %s)
-                """,
-                [
-                    semester,
-                    course_id,
-                    student_id,
-                ],
-            )
+            for course_id in course_ids:
+                cursor.execute(
+                    """
+                    INSERT INTO student_history (semester, course_id, student_id)
+                    VALUES (%s, %s, %s)
+                    """,
+                    [
+                        semester,
+                        course_id,
+                        student_id,
+                    ],
+                )
             return True
          
-    def find_courseid_by_title(self, subject):
-        print("in sql", subject)
+    def find_courseids_by_title(self, subject):
         with connection.cursor() as cursor:
             cursor.execute(
                 """SELECT course_id
                 FROM skku_subject
-                WHERE course_title = (%s)
-                LIMIT 1;""",
+                WHERE course_title = (%s);""",
                 [ subject ],
             )
             results = cursor.fetchall()
+
             if results:
-                course_id = results[0][0]  # 첫 번째 튜플의 첫 번째 값
-                print("course_id: ", course_id)
-                return course_id
+                course_ids = [item[0] for item in results]  # 첫 번째 튜플의 첫 번째 값
+                return course_ids
             else:
                 print("No results found.")
                 return -1
         
-    def get_history(self, student_id):
+    def get_history_of_student(self, student_id):
         with connection.cursor() as cursor:
             cursor.execute(
                 f"""SELECT course_id
@@ -172,15 +171,16 @@ class SQL:
             columns = [col[0] for col in cursor.fetchall()]
             return columns[0]
         
-    def delete_history(self, student_id, course_id):
-        print(student_id, course_id)
+    def delete_history(self, student_id, course_ids):
+        print(student_id, course_ids)
         with connection.cursor() as cursor:
-            cursor.execute(
-                """DELETE FROM student_history
-                WHERE course_id = %s
-                AND student_id = %s;""",
-                [course_id, student_id],
-            )
+            for course_id in course_ids:
+                cursor.execute(
+                    """DELETE FROM student_history
+                    WHERE course_id = %s
+                    AND student_id = %s;""",
+                    [course_id, student_id],
+                )
 
             print("result: ", cursor.rowcount)
             if cursor.rowcount > 0:

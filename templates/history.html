@@ -85,11 +85,10 @@
         // 기수강 과목 리스트 관련
         var certSubjectList = document.getElementById("cert-subject-list");
         // 기수강 과목 항목 추가
-        certTitles.forEach(function(title_course) {
+        certTitles.forEach(function(title) {
             var subjectItem = document.createElement("div");
             subjectItem.className = "subject-item flex justify-between items-center p-2 bg-green-50 border border-green-200 rounded-md shadow-sm";
-            subjectItem.textContent = title_course[0];
-            subjectItem.dataset.courseId = title_course[1];
+            subjectItem.textContent = title;
 
             // 삭제 버튼 생성
             var deleteBtn = document.createElement("button");
@@ -105,7 +104,7 @@
                         "X-CSRFToken": getCSRFToken(), // CSRF 토큰 추가
                         "X-Custom-Type": "delete", // 요청 구분을 위한 커스텀 헤더
                     },
-                    body: JSON.stringify({course_id : subjectItem.dataset.courseId}),
+                    body: JSON.stringify({course_title : subjectItem.textContent}),
                 });
 
                 if (response.ok) {
