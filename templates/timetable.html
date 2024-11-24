@@ -186,40 +186,40 @@
                       .catch(error => console.error('Error:', error));
                   }
 
-                  function toFix(element) {
-                      const courseId = element.getAttribute("data-class");  // course_id 가져오기
-                      console.log(`Clicked courseId: ${courseId}`);  // 디버깅: 클릭한 course_id 출력
+                  // function toFix(element) {
+                  //     const courseId = element.getAttribute("data-class");  // course_id 가져오기
+                  //     console.log(`Clicked courseId: ${courseId}`);  // 디버깅: 클릭한 course_id 출력
                   
-                      fetch('/subject/toggle_fix/', {
-                          method: 'POST',
-                          headers: {
-                              'Content-Type': 'application/json',
-                              'X-CSRFToken': '{{ csrf_token }}'
-                          },
-                          body: JSON.stringify({ course_id: courseId })
-                      })
-                      .then(response => response.json())
-                      .then(data => {
-                          if (data.success) {
-                              // 동일한 course_id를 가진 모든 셀 선택
-                              const elements = document.querySelectorAll(`[data-class="${courseId}"]`);
-                              console.log(`Elements affected: ${elements.length}`);  // 디버깅: 선택된 요소 수 출력
+                  //     fetch('/subject/toggle_fix/', {
+                  //         method: 'POST',
+                  //         headers: {
+                  //             'Content-Type': 'application/json',
+                  //             'X-CSRFToken': '{{ csrf_token }}'
+                  //         },
+                  //         body: JSON.stringify({ course_id: courseId })
+                  //     })
+                  //     .then(response => response.json())
+                  //     .then(data => {
+                  //         if (data.success) {
+                  //             // 동일한 course_id를 가진 모든 셀 선택
+                  //             const elements = document.querySelectorAll(`[data-class="${courseId}"]`);
+                  //             console.log(`Elements affected: ${elements.length}`);  // 디버깅: 선택된 요소 수 출력
                   
-                              elements.forEach(el => {
-                                  if (data.action === "added") {
-                                      el.classList.add('fixed-course');  // 모든 셀에 fixed-course 클래스 추가
-                                  } else if (data.action === "removed") {
-                                      el.classList.remove('fixed-course');  // 모든 셀에서 fixed-course 클래스 제거
-                                  }
-                              });
+                  //             elements.forEach(el => {
+                  //                 if (data.action === "added") {
+                  //                     el.classList.add('fixed-course');  // 모든 셀에 fixed-course 클래스 추가
+                  //                 } else if (data.action === "removed") {
+                  //                     el.classList.remove('fixed-course');  // 모든 셀에서 fixed-course 클래스 제거
+                  //                 }
+                  //             });
                   
-                              alert(data.message);  // 메시지 표시
-                          } else {
-                              alert("작업 중 오류가 발생했습니다.");
-                          }
-                      })
-                      .catch(error => console.error('Error:', error));
-                  }
+                  //             alert(data.message);  // 메시지 표시
+                  //         } else {
+                  //             alert("작업 중 오류가 발생했습니다.");
+                  //         }
+                  //     })
+                  //     .catch(error => console.error('Error:', error));
+                  //  }
                 </script>
 
             <div class="justify-items-center">
