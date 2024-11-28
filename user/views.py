@@ -475,8 +475,8 @@ class Timetable(APIView):
                         + " "
                         + "text"
                         + str(idx + 1)
-                        # + " "
-                        # + "pt-2 px-1"
+                        + " "
+                        + "pt-2 px-1"
                     )
                 else:
                     class_dict[t] = (
@@ -489,8 +489,8 @@ class Timetable(APIView):
                         + " "
                         + "text"
                         + str(idx + 1)
-                        # + " "
-                        # + "py-2 px-1 pb-2"
+                        + " "
+                        + "py-2 px-1 pb-2"
                     )
 
         class_list = class_dict.values()
