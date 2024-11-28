@@ -411,7 +411,8 @@ class Timetable(APIView):
         icam_class_dict = {}
         for idx, course in enumerate(icampus):
             icam_class_dict[course["course_title"]] = (
-                f"relative flex w-full px-2 py-1 text{str(idx+8)} adobe" + str(idx + 8)
+                f"relative flex w-full text{str(idx+8)} adobe" + str(idx + 8)
+                # f"relative flex w-full px-2 py-1 text{str(idx+8)} adobe" + str(idx + 8)
             )
 
         icam_text_list = icam_text_dict.values()
@@ -468,12 +469,14 @@ class Timetable(APIView):
                         + " "
                         + "w-full"  # 반응형 너비 설정
                         + " "
+                        + "h-8"
+                        + " "
                         + "font-semibold"
                         + " "
                         + "text"
                         + str(idx + 1)
-                        + " "
-                        + "pt-2 px-1"
+                        # + " "
+                        # + "pt-2 px-1"
                     )
                 else:
                     class_dict[t] = (
@@ -486,15 +489,15 @@ class Timetable(APIView):
                         + " "
                         + "text"
                         + str(idx + 1)
-                        + " "
-                        + "py-2 px-1 pb-2"
+                        # + " "
+                        # + "py-2 px-1 pb-2"
                     )
 
         class_list = class_dict.values()
 
-        print("aa")
-        print()
-        print(course["course_id"])
+        # print("aa")
+        # print()
+        # print(course["course_id"])
 
         id_dict = {}
         for t in all_time:

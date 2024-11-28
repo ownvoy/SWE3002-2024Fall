@@ -1,92 +1,119 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title>Timetable</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?after">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Timetable</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?after" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-.fixed-course1 {
-    background-color: #6a5acd; /* 중간 정도의 진한 보라색 */
-    color: white;
-}
+      .fixed-course1 {
+        background-color: #6a5acd; /* 중간 정도의 진한 보라색 */
+        color: white;
+      }
 
-.fixed-course2 {
-    background-color: #5f9ea0; /* 진한 청록색 */
-    color: white;
-}
+      .fixed-course2 {
+        background-color: #5f9ea0; /* 진한 청록색 */
+        color: white;
+      }
 
-.fixed-course3 {
-    background-color: #4682b4; /* 중간 정도의 파란색 */
-    color: white;
-}
+      .fixed-course3 {
+        background-color: #4682b4; /* 중간 정도의 파란색 */
+        color: white;
+      }
 
-.fixed-course4 {
-    background-color: #7b68ee; /* 옅은 남보라색 */
-    color: white;
-}
+      .fixed-course4 {
+        background-color: #7b68ee; /* 옅은 남보라색 */
+        color: white;
+      }
 
-.fixed-course5 {
-    background-color: #708090; /* 차분한 회청색 */
-    color: white;
-}
+      .fixed-course5 {
+        background-color: #708090; /* 차분한 회청색 */
+        color: white;
+      }
 
-.fixed-course6 {
-    background-color: #556b2f; /* 어두운 올리브 그린 */
-    color: white;
-}
+      .fixed-course6 {
+        background-color: #556b2f; /* 어두운 올리브 그린 */
+        color: white;
+      }
 
-.fixed-course7 {
-    background-color: #cd5c5c; /* 적갈색 */
-    color: white;
-}
+      .fixed-course7 {
+        background-color: #cd5c5c; /* 적갈색 */
+        color: white;
+      }
 
-.fixed-course8 {
-    background-color: #8b0000; /* 어두운 적색 (짙은 빨강) */
-    color: white;
-}
+      .fixed-course8 {
+        background-color: #8b0000; /* 어두운 적색 (짙은 빨강) */
+        color: white;
+      }
 
-.fixed-course9 {
-    background-color: #228b22; /* 포레스트 그린 */
-    color: white;
-}
+      .fixed-course9 {
+        background-color: #228b22; /* 포레스트 그린 */
+        color: white;
+      }
 
-.fixed-course10 {
-    background-color: #2f4f4f; /* 다크 슬레이트 그레이 */
-    color: white;
-}
+      .fixed-course10 {
+        background-color: #2f4f4f; /* 다크 슬레이트 그레이 */
+        color: white;
+      }
 
-.fixed-course11 {
-    background-color: #d2691e; /* 초콜릿 색상 */
-    color: white;
-}
+      .fixed-course11 {
+        background-color: #d2691e; /* 초콜릿 색상 */
+        color: white;
+      }
 
-.fixed-course12 {
-    background-color: #ff8c00; /* 다크 오렌지 */
-    color: black;
-}
+      .fixed-course12 {
+        background-color: #ff8c00; /* 다크 오렌지 */
+        color: black;
+      }
 
-.fixed-course13 {
-    background-color: #46845c; /* 어두운 청록색 변형 */
-    color: white;
-}
+      .fixed-course13 {
+        background-color: #46845c; /* 어두운 청록색 변형 */
+        color: white;
+      }
+      /* 화면 너비에 따른 폰트 크기 조정 */
+      @media (max-width: 1200px) {
+        .justify-items-center div {
+          font-size: 14px; /* 화면 너비가 1200px 이하일 때 폰트 크기 조정 */
+        }
+      }
 
-</style>
+      @media (max-width: 992px) {
+        .justify-items-center div {
+          font-size: 12px; /* 화면 너비가 992px 이하일 때 폰트 크기 조정 */
+        }
+      }
 
+      @media (max-width: 768px) {
+        .justify-items-center div {
+          font-size: 10px; /* 화면 너비가 768px 이하일 때 폰트 크기 조정 */
+        }
+      }
+
+      @media (max-width: 576px) {
+        .justify-items-center div {
+          font-size: 8px; /* 화면 너비가 576px 이하일 때 폰트 크기 조정 */
+        }
+      }
+    </style>
   </head>
   <body class="bg-green-100 merriweather-font">
     <div class="min-h-screen flex items-center justify-center">
-      <div class="relative flex flex-col items-center p-4 sm:p-6 md:p-8 min-w-full max-w-[960px]">
+      <div
+        class="relative flex flex-col items-center p-4 sm:p-6 md:p-8 min-w-full max-w-[960px]"
+      >
         <div
           class="m-4 sm:m-6 md:m-8 p-4 sm:p-6 md:p-8 bg-white rounded-lg shadow-md w-full"
         >
-        <div class="text-xl sm:text-2xl font-semibold text-center mt-4 p-4 sm:p-8">TIME TABLE</div>
           <div
-            class="grid grid-cols-6 gap-0 text-center"
+            class="text-xl sm:text-2xl font-semibold text-center mt-4 p-4 sm:p-8"
           >
+            TIME TABLE
+          </div>
+          <div class="grid grid-cols-6 gap-0 text-center">
             <div class="justify-items-center">
               <div class="border-t border-r border-gray-400 w-full h-8"></div>
               <div
@@ -150,82 +177,97 @@
                 12 class
               </div>
             </div>
-                <script>
-                  function toFix(element) {
-                      const courseId = element.getAttribute("data-class");  
-                      console.log(`Clicked courseId: ${courseId}`);
+            <script>
+              function toFix(element) {
+                const courseId = element.getAttribute("data-class");
+                console.log(`Clicked courseId: ${courseId}`);
 
-                      fetch('/subject/toggle_fix/?_=${new Date().getTime()}', {
-                          method: 'POST',
-                          headers: {
-                              'Content-Type': 'application/json',
-                              'X-CSRFToken': '{{ csrf_token }}'
-                          },
-                          body: JSON.stringify({ course_id: courseId })
-                      })
-                      .then(response => response.json())
-                      .then(data => {
-                          if (data.success) {
-                              const elements = document.querySelectorAll(`[data-class="${courseId}"]`);
-                              console.log(`Elements affected: ${elements.length}`);
+                fetch("/subject/toggle_fix/?_=${new Date().getTime()}", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",
+                  },
+                  body: JSON.stringify({ course_id: courseId }),
+                })
+                  .then((response) => response.json())
+                  .then((data) => {
+                    if (data.success) {
+                      const elements = document.querySelectorAll(
+                        `[data-class="${courseId}"]`
+                      );
+                      console.log(`Elements affected: ${elements.length}`);
 
-                              elements.forEach(el => {
-                                  el.classList.remove('fixed-course1', 'fixed-course2', 'fixed-course3','fixed-course4','fixed-course5', 'fixed-course6', 'fixed-course7','fixed-course8', 'fixed-course9', 'fixed-course10', 'fixed-course11', 'fixed-course12', 'fixed-course13'); // 기존 색상 클래스 제거
-                                  if (data.action === "added") {
-                                      el.classList.add(data.color_class);  // 서버에서 전달받은 색상 클래스 추가
-                                  }
-                              }
+                      elements.forEach((el) => {
+                        el.classList.remove(
+                          "fixed-course1",
+                          "fixed-course2",
+                          "fixed-course3",
+                          "fixed-course4",
+                          "fixed-course5",
+                          "fixed-course6",
+                          "fixed-course7",
+                          "fixed-course8",
+                          "fixed-course9",
+                          "fixed-course10",
+                          "fixed-course11",
+                          "fixed-course12",
+                          "fixed-course13"
+                        ); // 기존 색상 클래스 제거
+                        if (data.action === "added") {
+                          el.classList.add(data.color_class); // 서버에서 전달받은 색상 클래스 추가
+                        }
+                      });
 
-                              );
+                      alert(data.message);
+                    } else {
+                      alert("작업 중 오류가 발생했습니다.");
+                    }
+                  })
+                  .catch((error) => console.error("Error:", error));
+              }
 
-                              alert(data.message);
-                          } else {
-                              alert("작업 중 오류가 발생했습니다.");
-                          }
-                      })
-                      .catch(error => console.error('Error:', error));
-                  }
+              // function toFix(element) {
+              //     const courseId = element.getAttribute("data-class");  // course_id 가져오기
+              //     console.log(`Clicked courseId: ${courseId}`);  // 디버깅: 클릭한 course_id 출력
 
-                  // function toFix(element) {
-                  //     const courseId = element.getAttribute("data-class");  // course_id 가져오기
-                  //     console.log(`Clicked courseId: ${courseId}`);  // 디버깅: 클릭한 course_id 출력
-                  
-                  //     fetch('/subject/toggle_fix/', {
-                  //         method: 'POST',
-                  //         headers: {
-                  //             'Content-Type': 'application/json',
-                  //             'X-CSRFToken': '{{ csrf_token }}'
-                  //         },
-                  //         body: JSON.stringify({ course_id: courseId })
-                  //     })
-                  //     .then(response => response.json())
-                  //     .then(data => {
-                  //         if (data.success) {
-                  //             // 동일한 course_id를 가진 모든 셀 선택
-                  //             const elements = document.querySelectorAll(`[data-class="${courseId}"]`);
-                  //             console.log(`Elements affected: ${elements.length}`);  // 디버깅: 선택된 요소 수 출력
-                  
-                  //             elements.forEach(el => {
-                  //                 if (data.action === "added") {
-                  //                     el.classList.add('fixed-course');  // 모든 셀에 fixed-course 클래스 추가
-                  //                 } else if (data.action === "removed") {
-                  //                     el.classList.remove('fixed-course');  // 모든 셀에서 fixed-course 클래스 제거
-                  //                 }
-                  //             });
-                  
-                  //             alert(data.message);  // 메시지 표시
-                  //         } else {
-                  //             alert("작업 중 오류가 발생했습니다.");
-                  //         }
-                  //     })
-                  //     .catch(error => console.error('Error:', error));
-                  //  }
-                </script>
+              //     fetch('/subject/toggle_fix/', {
+              //         method: 'POST',
+              //         headers: {
+              //             'Content-Type': 'application/json',
+              //             'X-CSRFToken': '{{ csrf_token }}'
+              //         },
+              //         body: JSON.stringify({ course_id: courseId })
+              //     })
+              //     .then(response => response.json())
+              //     .then(data => {
+              //         if (data.success) {
+              //             // 동일한 course_id를 가진 모든 셀 선택
+              //             const elements = document.querySelectorAll(`[data-class="${courseId}"]`);
+              //             console.log(`Elements affected: ${elements.length}`);  // 디버깅: 선택된 요소 수 출력
+
+              //             elements.forEach(el => {
+              //                 if (data.action === "added") {
+              //                     el.classList.add('fixed-course');  // 모든 셀에 fixed-course 클래스 추가
+              //                 } else if (data.action === "removed") {
+              //                     el.classList.remove('fixed-course');  // 모든 셀에서 fixed-course 클래스 제거
+              //                 }
+              //             });
+
+              //             alert(data.message);  // 메시지 표시
+              //         } else {
+              //             alert("작업 중 오류가 발생했습니다.");
+              //         }
+              //     })
+              //     .catch(error => console.error('Error:', error));
+              //  }
+            </script>
 
             <div class="justify-items-center">
-              <div class="border-t border-r border-gray-400 w-full h-8">Mon</div>
-              {% for time, class, text, id in zipped %} 
-              {% if "Mon" in time %}
+              <div class="border-t border-r border-gray-400 w-full h-8">
+                Mon
+              </div>
+              {% for time, class, text, id in zipped %} {% if "Mon" in time %}
               <div
                 class="{{ class }}"
                 data-class="{{ id|escapejs }}"
@@ -236,9 +278,11 @@
               </div>
               {% endif %} {% endfor %}
             </div>
-            
+
             <div class="justify-items-center">
-              <div class="border-t border-r border-gray-400 w-full h-8">Tue</div>
+              <div class="border-t border-r border-gray-400 w-full h-8">
+                Tue
+              </div>
               {% for time, class, text, id in zipped2 %} {% if "Tue" in time %}
               <div
                 class="{{ class }}"
@@ -250,8 +294,11 @@
               </div>
               {% endif %} {% endfor %}
             </div>
+
             <div class="justify-items-center">
-              <div class="border-t border-r border-gray-400 w-full h-8">Wed</div>
+              <div class="border-t border-r border-gray-400 w-full h-8">
+                Wed
+              </div>
               {% for time, class, text, id in zipped3 %} {% if "Wed" in time %}
               <div
                 class="{{ class }}"
@@ -263,8 +310,11 @@
               </div>
               {% endif %} {% endfor %}
             </div>
+
             <div class="justify-items-center">
-              <div class="border-t border-r border-gray-400 w-full h-8">Thu</div>
+              <div class="border-t border-r border-gray-400 w-full h-8">
+                Thu
+              </div>
               {% for time, class, text, id in zipped4 %} {% if "Thu" in time %}
               <div
                 class="{{ class }}"
@@ -276,8 +326,11 @@
               </div>
               {% endif %} {% endfor %}
             </div>
+
             <div class="justify-items-center">
-              <div class="border-t border-r border-gray-400 w-full h-8">Fri</div>
+              <div class="border-t border-r border-gray-400 w-full h-8">
+                Fri
+              </div>
               {% for time, class, text, id in zipped5 %} {% if "Fri" in time %}
               <div
                 class="{{ class }}"
@@ -289,35 +342,37 @@
               </div>
               {% endif %} {% endfor %}
             </div>
-
-
           </div>
           {% for text, class in icampus %}
           <div class="{{ class }}">{{ text }}</div>
           {% endfor %}
         </div>
-        <div class="relative flex  flex-col items-center justify-center p-4 sm:p-8 ">
-            <a onClick="window.location.reload()" style="cursor: pointer;">
-                <div class=" p-3 perl2 font-semibold hover:bg-green-400">Recommend another timetable</div>
-            </a>
-
+        <div
+          class="relative flex flex-col items-center justify-center p-4 sm:p-8"
+        >
+          <a onClick="window.location.reload()" style="cursor: pointer">
+            <div class="p-3 perl2 font-semibold hover:bg-green-400">
+              Recommend another timetable
+            </div>
+          </a>
         </div>
+      </div>
     </div>
-</div>
-<script>
-  function adjustZoom() {
-    var width = window.innerWidth;
-    var zoomLevel = 1;
+    <script>
+      function adjustZoom() {
+        var width = window.innerWidth;
+        var zoomLevel = 1;
 
-    if (width < 600) { // 화면 너비가 600px보다 작을 때
-      zoomLevel = width / 600;
-    }
+        if (width < 600) {
+          // 화면 너비가 600px보다 작을 때
+          zoomLevel = width / 600;
+        }
 
-    document.body.style.zoom = zoomLevel;
-  }
+        document.body.style.zoom = zoomLevel;
+      }
 
-  window.addEventListener('resize', adjustZoom);
-  window.addEventListener('load', adjustZoom);
-</script>
-</body>
+      window.addEventListener("resize", adjustZoom);
+      window.addEventListener("load", adjustZoom);
+    </script>
+  </body>
 </html>
