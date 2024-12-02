@@ -3,10 +3,10 @@ name: Django CI/CD TEST
 on:
   push:
     branches:
-      - main  # main 브랜치에 푸시될 때 워크플로우 실행
+      - master  # master 브랜치에 푸시될 때 워크플로우 실행
   pull_request:
     branches:
-      - main  # main 브랜치로의 PR에 대해 워크플로우 실행
+      - master  # master 브랜치로의 PR에 대해 워크플로우 실행
 
 jobs:
   # 테스트를 실행할 job
