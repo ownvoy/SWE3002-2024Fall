@@ -99,8 +99,8 @@ class Registration(View):
         triple_major = request.POST.get("triple_major")
         student_grade = request.POST.get("student_grade")
         # double_major와 triple_major 값이 "X"이거나 빈칸일 때 None으로 처리
-        double_major = None if not double_major.strip() else double_major
-        triple_major = None if not triple_major.strip() else triple_major
+        double_major = None if not double_major else double_major
+        triple_major = None if not triple_major else triple_major
         sql = SQL()
         result = sql.register_user(
             login_id,
