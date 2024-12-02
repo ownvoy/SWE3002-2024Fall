@@ -57,7 +57,7 @@ jobs:
             echo "Waiting for MySQL to be ready..."
             sleep 3
           done
-          mysql -h 127.0.0.1 -u root -prootpassword swe3002_db < ./swe3002_dump.sql  # dump 파일로 DB 구축
+          mysql -h 127.0.0.1 -u root -prootpassword swe3002 < ./swe3002_dump.sql  # dump 파일로 DB 구축
 
       # 의존성 설치
       - name: Install Python dependencies
