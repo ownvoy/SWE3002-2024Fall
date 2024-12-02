@@ -22,11 +22,11 @@ jobs:
         image: mysql:8  # MySQL 8버전 이미지를 사용
         env:
           MYSQL_ROOT_PASSWORD: rootpassword
-          MYSQL_DATABASE: swe3002_db  # 사용할 데이터베이스 이름
+          MYSQL_DATABASE: swe3002  # 사용할 데이터베이스 이름
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping --host=127.0.0.1 --password=0513"
+          --health-cmd="mysqladmin ping --host=127.0.0.1 --password=1234"
           --health-timeout=5s
           --health-interval=10s
           --health-retries=5
